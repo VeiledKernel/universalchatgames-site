@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UniversalChatGames — Chat minigames for Spigot, Paper &amp; Folia</title>
+<meta name="description" content="Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia.">
+<style>
+  :root {
+    --bg: #0d1512;
+    --panel: #131d18;
+    --ink: #f2f5f3;
+    --muted: #9db3a8;
+    --amber: #f5b301;
+    --violet: #a855f7;
+    --teal: #2dd4bf;
+    --line: #223028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header.hero { text-align: center; padding: 88px 0 56px; }
+  header.hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); letter-spacing: -0.02em; }
+  header.hero p.tag { color: var(--muted); font-size: 1.2rem; margin-top: 12px; }
+  .chips { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+  .chip { border: 2px solid; border-radius: 999px; padding: 8px 22px; font-weight: 700; letter-spacing: 0.08em; }
+  .chip.amber { color: var(--amber); border-color: var(--amber); }
+  .chip.violet { color: var(--violet); border-color: var(--violet); }
+  .chip.teal { color: var(--teal); border-color: var(--teal); }
+  .strip { text-align: center; color: var(--muted); letter-spacing: 0.3em; margin-top: 24px; font-size: 0.85rem; }
+  .cta-row { display: flex; gap: 16px; justify-content: center; margin: 36px 0 8px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 14px 34px; border-radius: 10px; font-weight: 700; text-decoration: none; }
+  .btn.buy { background: var(--amber); color: #161006; }
+  .btn.ghost { border: 2px solid var(--line); color: var(--ink); }
+  section { padding: 40px 0; }
+  section h2 { font-size: 1.7rem; margin-bottom: 8px; }
+  section p.sub { color: var(--muted); margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+  .compat { display: flex; gap: 10px; flex-wrap: wrap; }
+  .compat span { border: 1px solid var(--line); border-radius: 8px; padding: 8px 16px; font-size: 0.9rem; }
+  ol.steps li, ul.faq li { margin-bottom: 14px; }
+  ol.steps { padding-left: 22px; }
+  ul.faq { list-style: none; }
+  ul.faq li strong { display: block; }
+  ul.faq li span { color: var(--muted); }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 0.9rem; text-align: center; }
+  code { background: #1a2620; padding: 2px 8px; border-radius: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>UniversalChatGames</h1>
+    <p class="tag">Dead chat kills servers. Five live chat games plus smart broadcasts. One jar, zero required database.</p>
+    <div class="chips">
+      <span class="chip amber">MATH</span>
+      <span class="chip violet">UNSCRAMBLE</span>
+      <span class="chip teal">TYPING</span>
+    </div>
+    <div class="strip">SPIGOT &middot; PAPER &middot; FOLIA</div>
+    <div class="cta-row">
+      <a class="btn buy" href="https://builtbybit.com/resources/universalchatgames.127513/">Get v1.2 — $9.99</a>
+      <a class="btn ghost" href="#setup">Setup in 3 steps</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>What it does</h2>
+    <p class="sub">Timed reward rounds plus announcements that fire on conditions, not timers.</p>
+    <div class="grid">
+      <div class="card"><h3>Math Flash</h3><p>Generated arithmetic, first correct answer wins.</p></div>
+      <div class="card"><h3>Word Unscramble</h3><p>Words from your list, shuffled live.</p></div>
+      <div class="card"><h3>Typing Speed</h3><p>Exact-phrase races with optional verbatim mode.</p></div>
+      <div class="card"><h3>Trivia</h3><p>Question bank from your config.</p></div>
+      <div class="card"><h3>Guess-the-Number</h3><p>Hidden number in your range.</p></div>
+      <div class="card"><h3>One winner, guaranteed</h3><p>Atomic claim lock. Simultaneous answers pay exactly one player.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Compatibility</h2>
+    <p class="sub">Honest limits: no scoreboard features, win tracking off by default.</p>
+    <div class="compat"><span>Spigot</span><span>Paper 1.20–1.21</span><span>Paper 26.x</span><span>Folia</span><span>Vault (optional)</span><span>Java 21+</span></div>
+  </section>
+
+  <section id="setup">
+    <h2>Setup in three steps</h2>
+    <ol class="steps">
+      <li>Drop the jar in <code>plugins/</code>, restart, check the enable line for <code>scheduler: Bukkit</code> or <code>scheduler: Folia</code>.</li>
+      <li>Rounds and broadcasts start automatically, winners paid automatically.</li>
+      <li>Tune <code>config.yml</code>. <code>/chatgames reload</code> applies live.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <ul class="faq">
+      <li><strong>Does it work on Folia?</strong><span>Yes, native region schedulers with automatic fallback.</span></li>
+      <li><strong>Do I need Vault?</strong><span>No, payouts fall back to console commands you configure.</span></li>
+      <li><strong>Will it spam chat?</strong><span>No. Broadcasts gate on player count, TPS, and cooldowns, and players can mute games.</span></li>
+      <li><strong>Do I need a database?</strong><span>No. Win tracking is optional and off by default.</span></li>
+    </ul>
+  </section>
+
+  <footer>UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page</footer>
+</div>
+</body>
+</html>
