@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Docs — UniversalChatGames v1.2</title>
+<meta name="description" content="Install, commands, permissions, and config reference for UniversalChatGames.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <strong class="logo"><a href="index.html" style="color:inherit;text-decoration:none">UniversalChatGames</a></strong>
+    <nav aria-label="Primary">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy — $9.99</a>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="section">
+  <p class="sub">UNIVERSALCHATGAMES · v1.2</p>
+  <h1>Docs</h1>
+  <p class="lede">Install, commands, permissions, and every config key. One page, no hunting.</p>
+
+  <h2>Install</h2>
+  <ol class="steps">
+    <li>Drop <code>universal-chatgames.jar</code> into <code>plugins/</code>.</li>
+    <li>Start the server once to generate <code>config.yml</code>.</li>
+    <li>Optional: install Vault plus an economy backend. Without Vault, set <code>engine-settings.reward-fallback-command</code>.</li>
+    <li>Restart. Console must show <code>UniversalChatGames enabled (scheduler: Bukkit)</code> on Spigot/Paper or <code>(scheduler: Folia)</code> on Folia.</li>
+  </ol>
+
+  <h2>Commands</h2>
+  <div class="feature-grid">
+    <article class="card"><h3><code>/chatgames reload</code></h3><p>Atomic config reload, safe mid-round. Permission: <code>chatgames.reload</code> (default op).</p></article>
+    <article class="card"><h3><code>/chatgames start [mode]</code></h3><p>Force a round now; rejects when one is active. Modes: MATH, UNSCRAMBLE, TYPING, TRIVIA, GUESS. Permission: <code>chatgames.admin</code> (default op).</p></article>
+    <article class="card"><h3><code>/chatgames skip</code></h3><p>Clear the active round. Permission: <code>chatgames.admin</code> (default op).</p></article>
+    <article class="card"><h3><code>/chatgames toggle</code></h3><p>Mute or unmute game messages for yourself. Players only, no permission needed.</p></article>
+    <article class="card"><h3><code>/chatgames audit</code></h3><p>Prints scheduler branch, versions, per-mode readiness, and storage state. Permission: <code>chatgames.admin</code> (default op).</p></article>
+  </div>
+
+  <h2>Config reference</h2>
+  <ul class="sub" style="list-style:none;padding:0">
+    <li><code>engine-settings.global-loop-interval-minutes</code> — minutes between rounds (default 15).</li>
+    <li><code>engine-settings.game-timeout-seconds</code> — answer window per round (default 30).</li>
+    <li><code>engine-settings.hide-correct-answer-from-chat</code> — hide the winning message (default true).</li>
+    <li><code>engine-settings.loser-feedback-enabled</code> — late correct answers get "Too slow!", max 2 per round (default false).</li>
+    <li><code>engine-settings.disabled-worlds</code> — worlds where rounds never start (default empty).</li>
+    <li><code>bedrock-settings.bedrock-typing-buffer-seconds</code> — extra answer time when a Bedrock player is online (default 3.5).</li>
+    <li><code>chat-games.*</code> — per mode: <code>enabled</code>, <code>min-players</code>, <code>reward-amount</code>, <code>weight</code>, <code>announcement-format</code>, plus word/phrase/question lists.</li>
+    <li><code>chat-games.trivia.questions</code> — one <code>question|answer</code> per line.</li>
+    <li><code>quizmaster</code> — chance Villager event (default off): <code>enabled</code>, <code>chance</code>, <code>reward-multiplier</code>, <code>despawn-seconds</code>, <code>entity-type</code>.</li>
+    <li><code>storage.enabled</code> — SQLite lifetime wins + fastest times in <code>wins.db</code> (default false).</li>
+    <li><code>smart-broadcasts</code> — <code>id</code>, <code>enabled</code>, <code>trigger-type</code> (INTERVAL or TPS), <code>message</code>, <code>min-players</code>, <code>tps-below-threshold</code>, <code>cooldown-minutes</code>.</li>
+  </ul>
+
+  <h2>Troubleshoot</h2>
+  <details><summary>UnknownDependencyException: Vault on old builds</summary><p>Update past the softdepend fix; current builds treat Vault as optional.</p></details>
+  <details><summary>UnsupportedClassVersionError</summary><p>The jar targets Java 21 bytecode; run the server on Java 21 or newer.</p></details>
+  <details><summary>Missing scheduler: Folia on Folia</summary><p>Check the enable line; <code>scheduler: Bukkit</code> on Folia means detection failed — report the build.</p></details>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
