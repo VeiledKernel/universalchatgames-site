@@ -5,108 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UniversalChatGames — Chat minigames for Spigot, Paper &amp; Folia</title>
 <meta name="description" content="Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia.">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0d1512;
-    --panel: #131d18;
-    --ink: #f2f5f3;
-    --muted: #9db3a8;
-    --amber: #f5b301;
-    --violet: #a855f7;
-    --teal: #2dd4bf;
-    --line: #223028;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.6; }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-  header.hero { text-align: center; padding: 88px 0 56px; }
-  header.hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); letter-spacing: -0.02em; }
-  header.hero p.tag { color: var(--muted); font-size: 1.2rem; margin-top: 12px; }
-  .chips { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
-  .chip { border: 2px solid; border-radius: 999px; padding: 8px 22px; font-weight: 700; letter-spacing: 0.08em; }
-  .chip.amber { color: var(--amber); border-color: var(--amber); }
-  .chip.violet { color: var(--violet); border-color: var(--violet); }
-  .chip.teal { color: var(--teal); border-color: var(--teal); }
-  .strip { text-align: center; color: var(--muted); letter-spacing: 0.3em; margin-top: 24px; font-size: 0.85rem; }
-  .cta-row { display: flex; gap: 16px; justify-content: center; margin: 36px 0 8px; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 14px 34px; border-radius: 10px; font-weight: 700; text-decoration: none; }
-  .btn.buy { background: var(--amber); color: #161006; }
-  .btn.ghost { border: 2px solid var(--line); color: var(--ink); }
-  section { padding: 40px 0; }
-  section h2 { font-size: 1.7rem; margin-bottom: 8px; }
-  section p.sub { color: var(--muted); margin-bottom: 24px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
-  .card h3 { margin-bottom: 8px; }
-  .card p { color: var(--muted); font-size: 0.95rem; }
-  .compat { display: flex; gap: 10px; flex-wrap: wrap; }
-  .compat span { border: 1px solid var(--line); border-radius: 8px; padding: 8px 16px; font-size: 0.9rem; }
-  ol.steps li, ul.faq li { margin-bottom: 14px; }
-  ol.steps { padding-left: 22px; }
-  ul.faq { list-style: none; }
-  ul.faq li strong { display: block; }
-  ul.faq li span { color: var(--muted); }
-  footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--muted); font-size: 0.9rem; text-align: center; }
-  code { background: #1a2620; padding: 2px 8px; border-radius: 6px; }
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .display { font-family: 'Space Grotesk', sans-serif; }
 </style>
 </head>
-<body>
-<div class="wrap">
+<body class="bg-[#0d1512] text-[#f2f5f3] antialiased">
 
-  <header class="hero">
-    <h1>UniversalChatGames</h1>
-    <p class="tag">Dead chat kills servers. Five live chat games plus smart broadcasts. One jar, zero required database.</p>
-    <div class="chips">
-      <span class="chip amber">MATH</span>
-      <span class="chip violet">UNSCRAMBLE</span>
-      <span class="chip teal">TYPING</span>
+<div class="bg-[#f5b301] text-[#161006] text-center text-sm font-bold py-2 px-4">v1.2 live — Trivia and Guess-the-Number just shipped</div>
+
+<nav class="border-b border-[#223028]">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <strong class="display text-lg">UniversalChatGames</strong>
+    <div class="space-x-5 text-sm text-[#9db3a8]">
+      <a href="#modes" class="hover:text-white">Modes</a>
+      <a href="#compat" class="hover:text-white">Compatibility</a>
+      <a href="#commands" class="hover:text-white">Commands</a>
+      <a href="#setup" class="hover:text-white">Setup</a>
+      <a href="#faq" class="hover:text-white">FAQ</a>
+      <a href="https://builtbybit.com/resources/universalchatgames.127513/" class="text-[#f5b301] font-bold">$9.99</a>
     </div>
-    <div class="strip">SPIGOT &middot; PAPER &middot; FOLIA</div>
-    <div class="cta-row">
-      <a class="btn buy" href="https://builtbybit.com/resources/universalchatgames.127513/">Get v1.2 — $9.99</a>
-      <a class="btn ghost" href="#setup">Setup in 3 steps</a>
+  </div>
+</nav>
+
+<header class="max-w-6xl mx-auto px-6 pt-20 pb-10 text-center">
+  <h1 class="display font-bold tracking-tight text-5xl md:text-6xl">Dead chat kills servers.</h1>
+  <p class="text-[#9db3a8] text-xl mt-4 max-w-2xl mx-auto">Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia. Zero required database.</p>
+  <div class="flex gap-3 justify-center flex-wrap mt-8">
+    <span class="border-2 border-[#f5b301] text-[#f5b301] rounded-full px-6 py-2 font-bold tracking-widest text-sm">MATH</span>
+    <span class="border-2 border-[#a855f7] text-[#a855f7] rounded-full px-6 py-2 font-bold tracking-widest text-sm">UNSCRAMBLE</span>
+    <span class="border-2 border-[#2dd4bf] text-[#2dd4bf] rounded-full px-6 py-2 font-bold tracking-widest text-sm">TYPING</span>
+  </div>
+  <p class="text-[#9db3a8] tracking-[0.3em] text-xs mt-6">SPIGOT &middot; PAPER &middot; FOLIA</p>
+  <div class="flex gap-4 justify-center mt-9 flex-wrap">
+    <a href="https://builtbybit.com/resources/universalchatgames.127513/" class="bg-[#f5b301] text-[#161006] font-bold px-8 py-3.5 rounded-lg">Get v1.2 — $9.99</a>
+    <a href="#setup" class="border-2 border-[#223028] px-8 py-3.5 rounded-lg font-bold">Setup in 3 steps</a>
+  </div>
+  <div class="flex gap-8 justify-center mt-10 text-center">
+    <div><div class="display text-3xl font-bold">5</div><div class="text-[#9db3a8] text-sm">game modes</div></div>
+    <div><div class="display text-3xl font-bold">6</div><div class="text-[#9db3a8] text-sm">CI legs green</div></div>
+    <div><div class="display text-3xl font-bold">1</div><div class="text-[#9db3a8] text-sm">jar, all platforms</div></div>
+  </div>
+</header>
+
+<section id="modes" class="border-t border-[#223028] bg-[#101915]">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="display text-3xl font-bold">Five games, one loop</h2>
+    <p class="text-[#9db3a8] mt-2 mb-8 max-w-2xl">Weighted rotation across enabled modes. Disabled modes never stall a round. Simultaneous answers pay exactly one player.</p>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-[#0d1512] border border-[#223028] border-t-4 border-t-[#f5b301] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Math Flash</h3><p class="text-[#9db3a8] text-sm">Generated arithmetic, first correct answer wins.</p></div>
+      <div class="bg-[#0d1512] border border-[#223028] border-t-4 border-t-[#a855f7] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Word Unscramble</h3><p class="text-[#9db3a8] text-sm">Words from your list, shuffled live.</p></div>
+      <div class="bg-[#0d1512] border border-[#223028] border-t-4 border-t-[#2dd4bf] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Typing Speed</h3><p class="text-[#9db3a8] text-sm">Exact-phrase races with optional verbatim mode.</p></div>
+      <div class="bg-[#0d1512] border border-[#223028] border-t-4 border-t-[#f5b301] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Trivia</h3><p class="text-[#9db3a8] text-sm">Question bank from your config.</p></div>
+      <div class="bg-[#0d1512] border border-[#223028] border-t-4 border-t-[#a855f7] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Guess-the-Number</h3><p class="text-[#9db3a8] text-sm">Hidden number in your range.</p></div>
+      <div class="bg-[#0d1512] border border-[#223028] border-t-4 border-t-[#2dd4bf] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Smart broadcasts</h3><p class="text-[#9db3a8] text-sm">Interval, player-count, and low-TPS alerts, each with its own cooldown.</p></div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <section>
-    <h2>What it does</h2>
-    <p class="sub">Timed reward rounds plus announcements that fire on conditions, not timers.</p>
-    <div class="grid">
-      <div class="card"><h3>Math Flash</h3><p>Generated arithmetic, first correct answer wins.</p></div>
-      <div class="card"><h3>Word Unscramble</h3><p>Words from your list, shuffled live.</p></div>
-      <div class="card"><h3>Typing Speed</h3><p>Exact-phrase races with optional verbatim mode.</p></div>
-      <div class="card"><h3>Trivia</h3><p>Question bank from your config.</p></div>
-      <div class="card"><h3>Guess-the-Number</h3><p>Hidden number in your range.</p></div>
-      <div class="card"><h3>One winner, guaranteed</h3><p>Atomic claim lock. Simultaneous answers pay exactly one player.</p></div>
+<section id="compat" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="display text-3xl font-bold">Compatibility</h2>
+  <p class="text-[#9db3a8] mt-2 mb-8">Honest limits: no scoreboard features, win tracking off by default.</p>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="border border-[#223028] rounded-xl p-6"><h3 class="font-bold mb-2">Server software</h3><p class="text-[#9db3a8] text-sm">Spigot · Paper 1.20–1.21 · Paper 26.x · Folia. One jar, scheduler auto-detect.</p></div>
+    <div class="border border-[#223028] rounded-xl p-6"><h3 class="font-bold mb-2">Requirements</h3><p class="text-[#9db3a8] text-sm">Java 21+ (25 for 26.x). Vault optional with console fallback. Geyser optional.</p></div>
+  </div>
+</section>
+
+<section id="setup" class="border-t border-[#223028] bg-[#101915]">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="display text-3xl font-bold">Setup in three steps</h2>
+    <div class="grid md:grid-cols-3 gap-4 mt-8">
+      <div class="p-6"><div class="text-[#f5b301] font-bold">01</div><h3 class="font-bold text-lg my-2">Drop it in</h3><p class="text-[#9db3a8] text-sm">Jar into plugins, restart, check the enable line for scheduler: Bukkit or scheduler: Folia.</p></div>
+      <div class="p-6"><div class="text-[#f5b301] font-bold">02</div><h3 class="font-bold text-lg my-2">It runs</h3><p class="text-[#9db3a8] text-sm">Rounds and broadcasts start automatically, winners paid automatically.</p></div>
+      <div class="p-6"><div class="text-[#f5b301] font-bold">03</div><h3 class="font-bold text-lg my-2">Tune it</h3><p class="text-[#9db3a8] text-sm">Words, questions, rewards, gradients in config.yml. /chatgames reload applies live.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <h2>Compatibility</h2>
-    <p class="sub">Honest limits: no scoreboard features, win tracking off by default.</p>
-    <div class="compat"><span>Spigot</span><span>Paper 1.20–1.21</span><span>Paper 26.x</span><span>Folia</span><span>Vault (optional)</span><span>Java 21+</span></div>
-  </section>
+<section id="commands" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="display text-3xl font-bold">Commands</h2>
+  <p class="text-[#9db3a8] mt-2 mb-8">Four commands, no console gymnastics.</p>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="border border-[#223028] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames reload</code></h3><p class="text-[#9db3a8] text-sm">Atomic config reload, safe mid-round. Permission: chatgames.reload.</p></div>
+    <div class="border border-[#223028] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames start [mode]</code></h3><p class="text-[#9db3a8] text-sm">Force a round now, any mode or named. Permission: chatgames.admin.</p></div>
+    <div class="border border-[#223028] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames skip</code></h3><p class="text-[#9db3a8] text-sm">Clear the active round. Permission: chatgames.admin.</p></div>
+    <div class="border border-[#223028] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames toggle</code></h3><p class="text-[#9db3a8] text-sm">Mute or unmute game messages for yourself.</p></div>
+  </div>
+</section>
 
-  <section id="setup">
-    <h2>Setup in three steps</h2>
-    <ol class="steps">
-      <li>Drop the jar in <code>plugins/</code>, restart, check the enable line for <code>scheduler: Bukkit</code> or <code>scheduler: Folia</code>.</li>
-      <li>Rounds and broadcasts start automatically, winners paid automatically.</li>
-      <li>Tune <code>config.yml</code>. <code>/chatgames reload</code> applies live.</li>
-    </ol>
-  </section>
+<section id="config" class="border-t border-[#223028] bg-[#101915]">
+  <div class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="display text-3xl font-bold">Config, not code</h2>
+    <p class="text-[#9db3a8] mt-2 mb-8">Everything lives in <code>config.yml</code>. One example:</p>
+    <pre class="bg-[#0d1512] border border-[#223028] rounded-xl p-6 text-sm overflow-x-auto"><code>chat-games:
+  trivia:
+    enabled: true
+    min-players: 5
+    reward-amount: 500.0
+    weight: 5
+    questions:
+      - "What year did Minecraft 1.0 release?|2011"</code></pre>
+  </div>
+</section>
 
-  <section>
-    <h2>FAQ</h2>
-    <ul class="faq">
-      <li><strong>Does it work on Folia?</strong><span>Yes, native region schedulers with automatic fallback.</span></li>
-      <li><strong>Do I need Vault?</strong><span>No, payouts fall back to console commands you configure.</span></li>
-      <li><strong>Will it spam chat?</strong><span>No. Broadcasts gate on player count, TPS, and cooldowns, and players can mute games.</span></li>
-      <li><strong>Do I need a database?</strong><span>No. Win tracking is optional and off by default.</span></li>
-    </ul>
-  </section>
+<section id="screens" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="display text-3xl font-bold">Live captures</h2>
+  <p class="text-[#9db3a8] mt-2">Real round screenshots landing here after the next test session. No mockups, no renders.</p>
+</section>
 
-  <footer>UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page</footer>
-</div>
+<section id="faq" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="display text-3xl font-bold mb-8">FAQ</h2>
+  <div class="space-y-3 max-w-3xl">
+    <details class="bg-[#131d18] border border-[#223028] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Does it work on Folia?</summary><p class="text-[#9db3a8] mt-2 text-sm">Yes, native region schedulers with automatic fallback.</p></details>
+    <details class="bg-[#131d18] border border-[#223028] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Do I need Vault?</summary><p class="text-[#9db3a8] mt-2 text-sm">No, payouts fall back to console commands you configure.</p></details>
+    <details class="bg-[#131d18] border border-[#223028] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Will it spam chat?</summary><p class="text-[#9db3a8] mt-2 text-sm">No. Broadcasts gate on player count, TPS, and cooldowns, and players can mute games.</p></details>
+    <details class="bg-[#131d18] border border-[#223028] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Do I need a database?</summary><p class="text-[#9db3a8] mt-2 text-sm">No. Win tracking is optional and off by default.</p></details>
+  </div>
+  <div class="text-center mt-12">
+    <a href="https://builtbybit.com/resources/universalchatgames.127513/" class="inline-block bg-[#f5b301] text-[#161006] font-bold px-8 py-3.5 rounded-lg">Get v1.2 — $9.99</a>
+  </div>
+</section>
+
+<footer class="border-t border-[#223028] py-8 text-center text-[#9db3a8] text-sm">UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page</footer>
+
 </body>
 </html>
