@@ -1,22 +1,132 @@
-:root {
-  --bg: #0d1512; --card: #131d18; --codebg: #101915; --line: #223028;
-  --ink: #f2f5f3; --mute: #9db3a8;
-  --amber: #f5b301; --on-amber: #161006;
-  --violet: #a855f7; --teal: #2dd4bf;
+/* Drop font.ttf (Minecraft-styled pixel type) next to index.html to activate.
+   Until then, Press Start 2P carries the game-store voice. */
+@font-face {
+  font-family: 'MinecraftFont';
+  src: url('font.ttf') format('truetype');
+  font-display: swap;
 }
+:root {
+  --bg: #0d0e12;
+  --card: #14161f;
+  --codebg: #101319;
+  --line: #232635;
+  --ink: #f2f5f3;
+  --mute: #9db3a8;
+  --amber: #f5b301;
+  --on-amber: #161006;
+  --violet: #a855f7;
+  --teal: #2dd4bf;
+  /* Optional hero artwork: set --hero-bg: url('hero.jpg') to layer a photo
+     under the gradient. No remote wallpaper is hotlinked by default. */
+  --hero-bg: none;
+}
+* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
-body { font-family: 'Inter', system-ui, sans-serif; }
-.display { font-family: 'Space Grotesk', sans-serif; }
-.hero { font-size: clamp(2rem, 5vw, 3rem) !important; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+}
+h1, .badge, .btn-primary {
+  font-family: 'MinecraftFont', 'Press Start 2P', monospace;
+}
+h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.4; }
+.badge, .btn-primary { font-size: 0.8rem; letter-spacing: 0.04em; }
 a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px;
 }
-/* Scroll reveal: cards and sections fade up once, only when motion is welcome. */
+.wrap { max-width: 1024px; margin: 0 auto; padding: 0 24px; }
+
+/* Sticky glass header: the single blurred surface (legibility over content). */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(13, 14, 18, 0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
+.logo { font-size: 1rem; }
+.site-header nav { display: flex; gap: 20px; font-size: 0.9rem; }
+.site-header nav a { color: var(--mute); text-decoration: none; }
+.site-header nav a:hover { color: #fff; }
+
+/* Buttons: amber fills act, ghost outlines defer. One primary CTA per viewport. */
+.btn { display: inline-block; padding: 14px 30px; border-radius: 10px; font-weight: 700; text-decoration: none; }
+.btn-sm { padding: 8px 16px; }
+.btn-block { display: block; text-align: center; }
+.btn-primary { background: var(--amber); color: var(--on-amber); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { border: 2px solid var(--line); color: var(--ink); }
+
+/* Hero: CSS-composed backdrop (gradient over optional artwork) so text
+   legibility never depends on a photo. */
+.hero {
+  background:
+    linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
+    var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+}
+.hero-inner { padding: 88px 0 64px; max-width: 640px; }
+.badge {
+  display: inline-block; border: 2px solid var(--amber); color: var(--amber);
+  border-radius: 999px; padding: 6px 18px; margin-bottom: 20px;
+}
+.lede { color: var(--mute); font-size: 1.15rem; margin: 18px 0 28px; }
+.hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-proof { color: var(--mute); font-size: 0.9rem; margin-top: 18px; }
+
+/* Sections: generous rhythm, no dividers. */
+.section { padding: 56px 0; }
+.section h2 { font-size: 1.5rem; margin: 0 0 8px; }
+.sub { color: var(--mute); margin: 0 0 28px; max-width: 640px; }
+
+/* Feature grid: 3 columns collapsing to 1. Cards share one shape; only the
+   top accent varies by mode identity. */
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 800px) { .feature-grid { grid-template-columns: 1fr; } }
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-top: 3px solid var(--line); border-radius: 12px; padding: 22px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 1px var(--amber), 0 0 24px rgba(245, 179, 1, 0.15);
+}
+.card h3 { margin: 12px 0 8px; font-size: 1.05rem; }
+.card p { color: var(--mute); font-size: 0.92rem; margin: 0; }
+.icon { width: 32px; height: 32px; }
+
+/* Checkout: one centered tier, the page's conversion focal point. */
+.checkout-card {
+  max-width: 420px; margin: 0 auto; text-align: center;
+  background: var(--card); border: 1px solid var(--amber);
+  border-radius: 16px; padding: 36px 32px;
+}
+.price { font-size: 3rem; font-weight: 700; margin: 16px 0; }
+.price .currency { font-size: 1.5rem; vertical-align: top; }
+.checkout-list { list-style: none; padding: 0; margin: 0 0 24px; color: var(--mute); font-size: 0.95rem; }
+.checkout-list li { margin-bottom: 8px; }
+.checkout-note { color: var(--mute); font-size: 0.8rem; margin-top: 14px; }
+
+/* Steps, code, FAQ. */
+.steps { padding-left: 22px; max-width: 640px; }
+.steps li { margin-bottom: 14px; }
+.steps li::marker { color: var(--amber); font-weight: 700; }
+code { background: var(--codebg); padding: 2px 8px; border-radius: 6px; font-size: 0.9em; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+summary { font-weight: 700; cursor: pointer; }
+details p { color: var(--mute); margin: 8px 0 0; font-size: 0.95rem; }
+
+footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--mute); font-size: 0.9rem; text-align: center; }
+
+/* Scroll reveal: cards and FAQ ease in once, skipped under reduced-motion. */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .reveal.visible { opacity: 1; transform: none; }
-/* Sticky nav gains separation once the hero scrolls under it. */
-nav.scrolled { box-shadow: 0 1px 0 var(--line), 0 8px 24px rgba(0, 0, 0, 0.35); }

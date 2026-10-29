@@ -1,17 +1,12 @@
 // Progressive enhancement only: the page is complete without this file.
-// 1. Scroll reveal for cards and sections (skipped under reduced-motion).
-// 2. Separation shadow on the sticky nav once content scrolls beneath it.
+// Scroll reveal for feature cards and FAQ entries (skipped under
+// reduced-motion). Sticky header needs no shadow: the glass blur plus the
+// bottom hairline already separate it.
 (function () {
-  var nav = document.querySelector('nav');
-  if (nav) {
-    addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', scrollY > 24);
-    }, { passive: true });
-  }
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
-  var targets = document.querySelectorAll('section .grid > div, section details, section pre');
+  var targets = document.querySelectorAll('.feature-grid > article, details');
   if (!('IntersectionObserver' in window) || !targets.length) {
     return;
   }

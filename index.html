@@ -5,127 +5,116 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UniversalChatGames v1.2 — Chat minigames for Spigot, Paper &amp; Folia</title>
 <meta name="description" content="Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia.">
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-[var(--bg)] text-[var(--ink)] antialiased">
+<body>
 
-<div class="bg-[var(--amber)] text-[var(--on-amber)] text-center text-sm font-bold py-2 px-4">v1.2 live — Trivia and Guess-the-Number just shipped</div>
-
-<nav class="border-b border-[var(--line)] sticky top-0 bg-[var(--bg)] backdrop-blur z-10">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <strong class="display text-lg">UniversalChatGames</strong>
-    <div class="space-x-5 text-sm text-[var(--mute)]">
-      <a href="#overview" class="hover:text-white">Overview</a>
-      <a href="#commands" class="hover:text-white">Commands</a>
-      <a href="#versions" class="hover:text-white">Versions</a>
-      <a href="#faq" class="hover:text-white">FAQ</a>
-      <a href="https://builtbybit.com/resources/universalchatgames.127513/" class="text-[var(--on-amber)] bg-[var(--amber)] font-bold px-4 py-2 rounded-lg">Buy — $9.99</a>
-    </div>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <strong class="logo">UniversalChatGames</strong>
+    <nav aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#setup">Setup</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy — $9.99</a>
   </div>
-</nav>
+</header>
 
-<div class="max-w-6xl mx-auto px-6 py-12 grid lg:grid-cols-[1fr_320px] gap-10">
-
-  <main>
-    <p class="text-[var(--mute)] text-sm tracking-widest">MINECRAFT PLUGIN · CHAT GAMES</p>
-    <h1 class="display hero font-bold tracking-tight mt-2">Dead chat kills servers.</h1>
-    <p class="text-[var(--mute)] text-xl mt-4">Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia. Zero required database.</p>
-    <div class="flex gap-3 flex-wrap mt-6">
-      <span class="border-2 border-[var(--amber)] text-[var(--amber)] rounded-full px-5 py-1.5 font-bold tracking-widest text-xs">MATH</span>
-      <span class="border-2 border-[var(--violet)] text-[var(--violet)] rounded-full px-5 py-1.5 font-bold tracking-widest text-xs">UNSCRAMBLE</span>
-      <span class="border-2 border-[var(--teal)] text-[var(--teal)] rounded-full px-5 py-1.5 font-bold tracking-widest text-xs">TYPING</span>
-      <span class="border-2 border-[var(--amber)] text-[var(--amber)] rounded-full px-5 py-1.5 font-bold tracking-widest text-xs">TRIVIA</span>
-      <span class="border-2 border-[var(--violet)] text-[var(--violet)] rounded-full px-5 py-1.5 font-bold tracking-widest text-xs">GUESS</span>
+<main>
+<section class="hero">
+  <div class="wrap hero-inner">
+    <span class="badge">v1.2 Ready</span>
+    <h1>Dead chat kills servers.</h1>
+    <p class="lede">Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia. Zero required database.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy Now — $9.99</a>
+      <a class="btn btn-ghost" href="#setup">Setup in 3 steps</a>
     </div>
+    <p class="hero-proof">Atomic single-winner lock — simultaneous answers pay exactly one player.</p>
+  </div>
+</section>
 
-    <section id="overview" class="mt-14">
-      <h2 class="display text-2xl font-bold">Overview</h2>
-      <p class="text-[var(--mute)] mt-3">Timed reward rounds plus announcements that fire on conditions, not timers. Weighted rotation across enabled modes — disabled modes never stall a round. Simultaneous answers pay exactly one player through an atomic claim lock.</p>
-      <div class="grid md:grid-cols-2 gap-4 mt-6">
-        <div class="bg-[var(--card)] border border-[var(--line)] border-t-4 border-t-[var(--amber)] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Math Flash</h3><p class="text-[var(--mute)] text-sm">Generated arithmetic, first correct answer wins.</p></div>
-        <div class="bg-[var(--card)] border border-[var(--line)] border-t-4 border-t-[var(--violet)] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Word Unscramble</h3><p class="text-[var(--mute)] text-sm">Words from your list, shuffled live.</p></div>
-        <div class="bg-[var(--card)] border border-[var(--line)] border-t-4 border-t-[var(--teal)] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Typing Speed</h3><p class="text-[var(--mute)] text-sm">Exact-phrase races with optional verbatim mode.</p></div>
-        <div class="bg-[var(--card)] border border-[var(--line)] border-t-4 border-t-[var(--amber)] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Trivia</h3><p class="text-[var(--mute)] text-sm">Question bank from your config.</p></div>
-        <div class="bg-[var(--card)] border border-[var(--line)] border-t-4 border-t-[var(--violet)] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Guess-the-Number</h3><p class="text-[var(--mute)] text-sm">Hidden number in your range.</p></div>
-        <div class="bg-[var(--card)] border border-[var(--line)] border-t-4 border-t-[var(--teal)] rounded-xl p-6"><h3 class="font-bold text-lg mb-2">Smart broadcasts</h3><p class="text-[var(--mute)] text-sm">Interval, player-count, and low-TPS alerts, each with its own cooldown.</p></div>
-      </div>
-    </section>
+<section id="features" class="wrap section">
+  <h2>Five games, one loop</h2>
+  <p class="sub">Weighted rotation across enabled modes. Disabled modes never stall a round.</p>
+  <div class="feature-grid">
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><polygon points="8,1 13,5 8,15 3,5" fill="#2dd4bf"/><polygon points="8,1 13,5 8,7 3,5" fill="#99f6e4"/></svg>
+      <h3>Math Flash</h3>
+      <p>Generated arithmetic, first correct answer wins.</p>
+    </article>
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="3" width="12" height="2" fill="#a855f7"/><rect x="2" y="7" width="8" height="2" fill="#a855f7"/><rect x="2" y="11" width="10" height="2" fill="#7e22ce"/><rect x="12" y="7" width="2" height="2" fill="#d8b4fe"/></svg>
+      <h3>Word Unscramble</h3>
+      <p>Words from your list, shuffled live.</p>
+    </article>
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="1" y="4" width="14" height="8" fill="#2dd4bf"/><rect x="3" y="6" width="2" height="2" fill="#0d0e12"/><rect x="6" y="6" width="2" height="2" fill="#0d0e12"/><rect x="9" y="6" width="2" height="2" fill="#0d0e12"/><rect x="4" y="9" width="8" height="1" fill="#0d0e12"/></svg>
+      <h3>Typing Speed</h3>
+      <p>Exact-phrase races with optional verbatim mode.</p>
+    </article>
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="3" y="2" width="10" height="12" fill="#f5b301"/><rect x="3" y="2" width="2" height="12" fill="#b45309"/><rect x="6" y="5" width="6" height="1" fill="#0d0e12"/><rect x="6" y="8" width="6" height="1" fill="#0d0e12"/><rect x="6" y="11" width="4" height="1" fill="#0d0e12"/></svg>
+      <h3>Trivia</h3>
+      <p>Question bank from your config.</p>
+    </article>
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="5" y="5" width="6" height="6" fill="none" stroke="#a855f7" stroke-width="2"/><rect x="7" y="7" width="2" height="2" fill="#a855f7"/></svg>
+      <h3>Guess-the-Number</h3>
+      <p>Hidden number in your range.</p>
+    </article>
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><polygon points="8,1 15,6 12,6 12,11 4,11 4,6 1,6" fill="#f5b301"/><circle cx="8" cy="12" r="1" fill="#f5b301"/><rect x="7" y="13" width="2" height="2" fill="#f5b301"/></svg>
+      <h3>Smart broadcasts</h3>
+      <p>Interval, player-count, and low-TPS alerts, each with its own cooldown.</p>
+    </article>
+  </div>
+</section>
 
-    <section id="commands" class="mt-14">
-      <h2 class="display text-2xl font-bold">Commands</h2>
-      <div class="grid md:grid-cols-2 gap-4 mt-6">
-        <div class="border border-[var(--line)] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames reload</code></h3><p class="text-[var(--mute)] text-sm">Atomic config reload, safe mid-round. Permission: chatgames.reload.</p></div>
-        <div class="border border-[var(--line)] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames start [mode]</code></h3><p class="text-[var(--mute)] text-sm">Force a round now, any mode or named. Permission: chatgames.admin.</p></div>
-        <div class="border border-[var(--line)] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames skip</code></h3><p class="text-[var(--mute)] text-sm">Clear the active round. Permission: chatgames.admin.</p></div>
-        <div class="border border-[var(--line)] rounded-xl p-6"><h3 class="font-bold mb-2"><code>/chatgames toggle</code></h3><p class="text-[var(--mute)] text-sm">Mute or unmute game messages for yourself.</p></div>
-      </div>
-    </section>
+<section id="pricing" class="wrap section">
+  <h2>Get UniversalChatGames</h2>
+  <p class="sub">One purchase, every future 1.x update included.</p>
+  <div class="checkout-card">
+    <span class="badge">Lifetime access</span>
+    <div class="price"><span class="currency">$</span>9.99</div>
+    <ul class="checkout-list">
+      <li>All 5 game modes + smart broadcasts</li>
+      <li>Spigot · Paper · Folia, one jar</li>
+      <li>Vault + Bedrock-friendly, no database required</li>
+    </ul>
+    <a class="btn btn-primary btn-block" href="https://builtbybit.com/resources/universalchatgames.127513/">Checkout on BuiltByBit</a>
+    <p class="checkout-note">Secure checkout via BuiltByBit · Java 21+ (25 for 26.x)</p>
+  </div>
+</section>
 
-    <section class="mt-14">
-      <h2 class="display text-2xl font-bold">Config, not code</h2>
-      <p class="text-[var(--mute)] mt-3 mb-4">Everything lives in <code>config.yml</code>. One example:</p>
-      <pre class="bg-[var(--codebg)] border border-[var(--line)] rounded-xl p-6 text-sm overflow-x-auto"><code>chat-games:
-  trivia:
-    enabled: true
-    min-players: 5
-    reward-amount: 500.0
-    weight: 5
-    questions:
-      - "What year did Minecraft 1.0 release?|2011"</code></pre>
-    </section>
+<section id="setup" class="wrap section">
+  <h2>Setup in three steps</h2>
+  <ol class="steps">
+    <li><strong>Drop it in.</strong> Jar into <code>plugins/</code>, restart, check the enable line for <code>scheduler: Bukkit</code> or <code>scheduler: Folia</code>.</li>
+    <li><strong>It runs.</strong> Rounds and broadcasts start automatically, winners paid automatically.</li>
+    <li><strong>Tune it.</strong> Words, questions, rewards, gradients in <code>config.yml</code>. <code>/chatgames reload</code> applies live.</li>
+  </ol>
+</section>
 
-    <section id="versions" class="mt-14">
-      <h2 class="display text-2xl font-bold">Versions</h2>
-      <div class="mt-6 space-y-3">
-        <div class="border border-[var(--amber)] rounded-xl p-6"><div class="flex items-center justify-between flex-wrap gap-2"><h3 class="font-bold text-lg">v1.2.0 — current</h3><span class="text-xs bg-[var(--amber)] text-[var(--on-amber)] font-bold px-3 py-1 rounded-full">LATEST</span></div><p class="text-[var(--mute)] text-sm mt-2">Trivia bank, Guess-the-Number, weighted rotation, force-start/skip, mute toggle, world blacklist, SQLite wins with fastest-time records, Bedrock-aware timeouts.</p></div>
-        <div class="border border-[var(--line)] rounded-xl p-6"><h3 class="font-bold text-lg">v1.1.0</h3><p class="text-[var(--mute)] text-sm mt-2">Capped near-miss feedback, per-mode weights, admin start/skip, Floodgate detection, GRACE-state Bedrock buffer.</p></div>
-        <div class="border border-[var(--line)] rounded-xl p-6"><h3 class="font-bold text-lg">v1.0.0</h3><p class="text-[var(--mute)] text-sm mt-2">Math, Unscramble, Typing, smart broadcasts, Vault payouts, Folia-native scheduling.</p></div>
-      </div>
-    </section>
+<section id="faq" class="wrap section">
+  <h2>FAQ</h2>
+  <details><summary>Does it work on Folia?</summary><p>Yes, native region schedulers with automatic fallback.</p></details>
+  <details><summary>Do I need Vault?</summary><p>No, payouts fall back to console commands you configure.</p></details>
+  <details><summary>Will it spam chat?</summary><p>No. Broadcasts gate on player count, TPS, and cooldowns, and players can mute games.</p></details>
+  <details><summary>Do I need a database?</summary><p>No. Win tracking is optional and off by default.</p></details>
+  <details><summary>Where do I get support?</summary><p>Through the BuiltByBit resource page. Send your server version and the enable line.</p></details>
+</section>
+</main>
 
-    <section id="faq" class="mt-14">
-      <h2 class="display text-2xl font-bold mb-6">FAQ</h2>
-      <div class="space-y-3">
-        <details class="bg-[var(--card)] border border-[var(--line)] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Does it work on Folia?</summary><p class="text-[var(--mute)] mt-2 text-sm">Yes, native region schedulers with automatic fallback.</p></details>
-        <details class="bg-[var(--card)] border border-[var(--line)] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Do I need Vault?</summary><p class="text-[var(--mute)] mt-2 text-sm">No, payouts fall back to console commands you configure.</p></details>
-        <details class="bg-[var(--card)] border border-[var(--line)] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Will it spam chat?</summary><p class="text-[var(--mute)] mt-2 text-sm">No. Broadcasts gate on player count, TPS, and cooldowns, and players can mute games.</p></details>
-        <details class="bg-[var(--card)] border border-[var(--line)] rounded-lg px-5 py-4"><summary class="font-bold cursor-pointer">Do I need a database?</summary><p class="text-[var(--mute)] mt-2 text-sm">No. Win tracking is optional and off by default.</p></details>
-      </div>
-    </section>
-  </main>
-
-  <aside class="lg:sticky lg:top-20 self-start space-y-4">
-    <div class="bg-[var(--card)] border border-[var(--line)] rounded-xl p-6">
-      <div class="display text-4xl font-bold">$9.99</div>
-      <div class="text-[var(--mute)] text-sm mt-1">one-time · v1.2.0 · all future 1.x updates</div>
-      <a href="https://builtbybit.com/resources/universalchatgames.127513/" class="block text-center bg-[var(--amber)] text-[var(--on-amber)] font-bold px-6 py-3.5 rounded-lg mt-5">Buy now</a>
-      <div class="text-[var(--mute)] text-xs mt-3 text-center">Secure checkout via BuiltByBit</div>
-    </div>
-    <div class="bg-[var(--card)] border border-[var(--line)] rounded-xl p-6 text-sm">
-      <h3 class="font-bold mb-3">Compatibility</h3>
-      <ul class="text-[var(--mute)] space-y-2">
-        <li>Spigot · Paper 1.20–1.21</li>
-        <li>Paper 26.x · Folia</li>
-        <li>Java 21+ (25 for 26.x)</li>
-        <li>Vault optional</li>
-        <li>Geyser optional</li>
-      </ul>
-    </div>
-    <div class="bg-[var(--card)] border border-[var(--line)] rounded-xl p-6 text-sm">
-      <h3 class="font-bold mb-3">At a glance</h3>
-      <ul class="text-[var(--mute)] space-y-2">
-        <li>5 game modes</li>
-        <li>1 jar, all platforms</li>
-        <li>No required database</li>
-      </ul>
-    </div>
-  </aside>
-</div>
-
-<footer class="border-t border-[var(--line)] py-8 text-center text-[var(--mute)] text-sm mt-8">UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page</footer>
+<footer>
+  <div class="wrap">
+    UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page
+  </div>
+</footer>
 
 <script src="app.js" defer></script>
 </body>
