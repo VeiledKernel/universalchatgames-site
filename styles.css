@@ -1,0 +1,22 @@
+:root {
+  --bg: #0d1512; --card: #131d18; --codebg: #101915; --line: #223028;
+  --ink: #f2f5f3; --mute: #9db3a8;
+  --amber: #f5b301; --on-amber: #161006;
+  --violet: #a855f7; --teal: #2dd4bf;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+body { font-family: 'Inter', system-ui, sans-serif; }
+.display { font-family: 'Space Grotesk', sans-serif; }
+.hero { font-size: clamp(2rem, 5vw, 3rem) !important; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px;
+}
+/* Scroll reveal: cards and sections fade up once, only when motion is welcome. */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+/* Sticky nav gains separation once the hero scrolls under it. */
+nav.scrolled { box-shadow: 0 1px 0 var(--line), 0 8px 24px rgba(0, 0, 0, 0.35); }
