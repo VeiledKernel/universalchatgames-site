@@ -3,10 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UniversalChatGames v1.2 — Chat minigames for Spigot, Paper &amp; Folia</title>
+<title>UniversalChatGames v1.3 — Chat minigames for Spigot, Paper &amp; Folia</title>
 <meta name="description" content="Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia.">
+<meta name="theme-color" content="#0d0e12">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,7 +35,7 @@
 <main>
 <section class="hero">
   <div class="wrap hero-inner">
-    <span class="badge">v1.2 Ready</span>
+    <span class="badge">v1.3 Ready</span>
     <h1>Dead chat kills servers.</h1>
     <p class="lede">Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia. Zero required database.</p>
     <div class="hero-cta">
@@ -73,6 +80,29 @@
       <h3>Smart broadcasts</h3>
       <p>Interval, player-count, and low-TPS alerts, each with its own cooldown.</p>
     </article>
+    <article class="card">
+      <svg class="icon" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><rect x="6" y="1" width="4" height="3" fill="#f5b301"/><rect x="4" y="4" width="8" height="7" fill="#f5b301"/><rect x="4" y="4" width="8" height="2" fill="#b45309"/><rect x="6" y="11" width="1" height="4" fill="#f5b301"/><rect x="9" y="11" width="1" height="4" fill="#f5b301"/></svg>
+      <h3>Wandering Quizmaster <span class="badge badge-sm">New</span></h3>
+      <p>A named Villager appears near a random player asking multiplied-reward questions. Opt-in.</p>
+    </article>
+  </div>
+</section>
+
+<section id="captures" class="wrap section">
+  <h2>How a round looks</h2>
+  <p class="sub">Concept mockups in game-chat style. Real captures ship after release.</p>
+  <div class="feature-grid">
+    <div class="mc-chat" role="img" aria-label="Concept mockup of a math flash round in Minecraft chat">
+      <p><span class="mc-red">[MATH FLASH]</span> <span class="mc-white">Quick! What is </span><span class="mc-yellow">67 * 56</span><span class="mc-white">?</span></p>
+      <p><span class="mc-gray">&lt;TestPlayer1&gt; 3752</span></p>
+      <p><span class="mc-green">You won! +250.0</span></p>
+    </div>
+    <div class="mc-chat" role="img" aria-label="Concept mockup of a quizmaster round in Minecraft chat">
+      <p><span class="mc-gold">[QUIZMASTER near Ana]</span> <span class="mc-white">Unscramble: </span><span class="mc-yellow">LBEDNRE</span><span class="mc-white">!</span></p>
+      <p><span class="mc-gray">&lt;Bob&gt; blender</span></p>
+      <p><span class="mc-green">Bob won! +1500.0</span></p>
+      <p><span class="mc-gold">New record! Bob answered in 4.2s</span></p>
+    </div>
   </div>
 </section>
 
@@ -114,7 +144,7 @@
 
 <footer>
   <div class="wrap">
-    UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page
+    UniversalChatGames v1.3 by VeiledKernel · Support via BuiltByBit resource page
   </div>
 </footer>
 

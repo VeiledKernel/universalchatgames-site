@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Docs — UniversalChatGames v1.2</title>
+<title>Docs — UniversalChatGames v1.3</title>
 <meta name="description" content="Install, commands, permissions, and config reference for UniversalChatGames.">
+<meta name="theme-color" content="#0d0e12">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,7 +19,9 @@
     <nav aria-label="Primary">
       <a href="index.html#features">Features</a>
       <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#setup">Setup</a>
       <a href="index.html#faq">FAQ</a>
+      <a href="docs.html" aria-current="page">Docs</a>
     </nav>
     <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy — $9.99</a>
   </div>
@@ -45,19 +51,40 @@
   </div>
 
   <h2>Config reference</h2>
-  <ul class="sub" style="list-style:none;padding:0">
-    <li><code>engine-settings.global-loop-interval-minutes</code> — minutes between rounds (default 15).</li>
-    <li><code>engine-settings.game-timeout-seconds</code> — answer window per round (default 30).</li>
-    <li><code>engine-settings.hide-correct-answer-from-chat</code> — hide the winning message (default true).</li>
-    <li><code>engine-settings.loser-feedback-enabled</code> — late correct answers get "Too slow!", max 2 per round (default false).</li>
-    <li><code>engine-settings.disabled-worlds</code> — worlds where rounds never start (default empty).</li>
-    <li><code>bedrock-settings.bedrock-typing-buffer-seconds</code> — extra answer time when a Bedrock player is online (default 3.5).</li>
-    <li><code>chat-games.*</code> — per mode: <code>enabled</code>, <code>min-players</code>, <code>reward-amount</code>, <code>weight</code>, <code>announcement-format</code>, plus word/phrase/question lists.</li>
-    <li><code>chat-games.trivia.questions</code> — one <code>question|answer</code> per line.</li>
-    <li><code>quizmaster</code> — chance Villager event (default off): <code>enabled</code>, <code>chance</code>, <code>reward-multiplier</code>, <code>despawn-seconds</code>, <code>entity-type</code>.</li>
-    <li><code>storage.enabled</code> — SQLite lifetime wins + fastest times in <code>wins.db</code> (default false).</li>
-    <li><code>smart-broadcasts</code> — <code>id</code>, <code>enabled</code>, <code>trigger-type</code> (INTERVAL or TPS), <code>message</code>, <code>min-players</code>, <code>tps-below-threshold</code>, <code>cooldown-minutes</code>.</li>
-  </ul>
+  <p class="sub">Everything lives in <code>config.yml</code>. Edit, save, then run <code>/chatgames reload</code> — no restart needed.</p>
+  <div class="feature-grid">
+    <article class="card">
+      <h3>Round timing</h3>
+      <p><code>global-loop-interval-minutes</code> (15) — how often a round or broadcast fires.</p>
+      <p><code>game-timeout-seconds</code> (30) — how long players have to answer.</p>
+      <p><code>hide-correct-answer-from-chat</code> (on) — hides the winning message so it can't spoil the next round.</p>
+    </article>
+    <article class="card">
+      <h3>Fairness</h3>
+      <p><code>loser-feedback-enabled</code> (off) — late correct answers hear "Too slow!", max 2 per round.</p>
+      <p><code>disabled-worlds</code> (none) — world names where rounds never start. Good for lobbies and minigame maps.</p>
+      <p><code>bedrock-typing-buffer-seconds</code> (3.5) — extra answer time while a Bedrock player is online, so touchscreens stay competitive.</p>
+    </article>
+    <article class="card">
+      <h3>Game modes</h3>
+      <p>Each mode has <code>enabled</code>, <code>min-players</code>, <code>reward-amount</code>, <code>weight</code> (pick chance), and <code>announcement-format</code>, plus its own word, phrase, or question list.</p>
+      <p>Trivia lines look like this: <code>What year did Minecraft 1.0 release?|2011</code> — question, pipe, exact answer.</p>
+    </article>
+    <article class="card">
+      <h3>Quizmaster event</h3>
+      <p>Off by default. When on, a named Villager sometimes spawns near a random player asking a high-value question.</p>
+      <p><code>chance</code> (0.10) — odds per round. <code>reward-multiplier</code> (3.0) — payout times the normal reward. <code>despawn-seconds</code> (60) — how long it sticks around.</p>
+    </article>
+    <article class="card">
+      <h3>Win tracking</h3>
+      <p><code>storage.enabled</code> (off) — saves lifetime wins and fastest times to <code>wins.db</code> for leaderboards. Leave off if you don't need records.</p>
+    </article>
+    <article class="card">
+      <h3>Smart broadcasts</h3>
+      <p>Each entry needs an <code>id</code>, a <code>message</code>, and a <code>trigger-type</code>: <code>INTERVAL</code> fires on a timer, <code>TPS</code> fires only when the server lags below <code>tps-below-threshold</code>.</p>
+      <p><code>min-players</code> gates quiet servers, <code>cooldown-minutes</code> stops repeats.</p>
+    </article>
+  </div>
 
   <h2>Troubleshoot</h2>
   <details><summary>UnknownDependencyException: Vault on old builds</summary><p>Update past the softdepend fix; current builds treat Vault as optional.</p></details>
@@ -68,7 +95,7 @@
 
 <footer>
   <div class="wrap">
-    UniversalChatGames v1.2 by VeiledKernel · Support via BuiltByBit resource page
+    UniversalChatGames v1.3 by VeiledKernel · Support via BuiltByBit resource page
   </div>
 </footer>
 

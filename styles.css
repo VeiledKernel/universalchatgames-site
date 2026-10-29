@@ -21,6 +21,9 @@
   --hero-bg: none;
 }
 * { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+.header-inner { flex-wrap: wrap; row-gap: 10px; }
+pre { max-width: 100%; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -38,6 +41,16 @@ h1, .badge, .btn-primary {
 }
 h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.4; }
 .badge, .btn-primary { font-size: 0.8rem; letter-spacing: 0.04em; }
+.badge-sm { font-size: 0.6rem; padding: 3px 10px; margin-left: 8px; vertical-align: middle; }
+/* Concept mockups: game-chat panels, clearly labeled as mockups in copy. */
+.mc-chat {
+  background: rgba(0, 0, 0, 0.55); border: 1px solid var(--line);
+  border-radius: 10px; padding: 18px; font-family: 'MinecraftFont', 'Press Start 2P', monospace;
+  font-size: 0.72rem; line-height: 2;
+}
+.mc-chat p { margin: 0; }
+.mc-white { color: #fff; } .mc-gray { color: #aaa; } .mc-green { color: #5f5; }
+.mc-yellow { color: #ff5; } .mc-gold { color: #fa0; } .mc-red { color: #f55; }
 a:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px;
 }
