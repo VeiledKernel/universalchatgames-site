@@ -43,3 +43,10 @@ PlayStation system: token discipline, section rhythm, pill CTAs.
 - `lg:` two-column (content + sticky rail) → single column below.
 - Hero scales by clamp, never fixed steps. Grids collapse 2-up → 1-up.
 - Sticky rail becomes static flow on mobile.
+
+## Reward rarity bands (Minecraft language, CSS-only)
+- Common: `#5f5` green, rewards under 500 (mockup `+250.0` → `.rar-common`).
+- Rare: `#fa0` gold, rewards 500–999 (checkout `Launch tier` note → `.launch-tier`).
+- Epic: `#a855f7` violet, rewards 1000+ (mockup `+1500.0` → `.rar-epic`).
+- Mockup chat lines keep game-chat voice; only the reward amount carries the tier color.
+- No asset changes for tiers — text color classes only.

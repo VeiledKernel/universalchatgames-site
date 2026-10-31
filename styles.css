@@ -162,3 +162,39 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--m
 h3 img { vertical-align: middle; }
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* Reward rarity tiers (Minecraft language): green <500, gold 500-999, purple 1000+. */
+.rar-common { color: #5f5; }
+.rar-rare { color: #fa0; }
+.rar-epic { color: #a855f7; }
+.launch-tier { color: #fa0; font-size: 0.8rem; font-weight: 700; }
+
+/* Icon lit variants: same silhouette, one step lighter, on card hover. */
+.card:hover .icon[src="assets/icon-math.png"] { content: url('assets/icon-math-lit.png'); }
+.card:hover .icon[src="assets/icon-unscramble.png"] { content: url('assets/icon-unscramble-lit.png'); }
+.card:hover .icon[src="assets/icon-typing.png"] { content: url('assets/icon-typing-lit.png'); }
+.card:hover .icon[src="assets/icon-trivia.png"] { content: url('assets/icon-trivia-lit.png'); }
+.card:hover .icon[src="assets/icon-guess.png"] { content: url('assets/icon-guess-lit.png'); }
+.card:hover .icon[src="assets/icon-broadcast.png"] { content: url('assets/icon-broadcast-lit.png'); }
+
+/* Hero shimmer: frame A/B swap every 900ms, discrete steps. */
+@keyframes heroShimmer {
+  0%, 49.9% {
+    background:
+      linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
+      url('assets/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+  }
+  50%, 100% {
+    background:
+      linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
+      url('assets/hero-bg-b.png');
+    background-size: cover;
+    background-position: center;
+  }
+}
+.hero { animation: heroShimmer 1.8s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero { animation: none; }
+}
