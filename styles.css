@@ -140,6 +140,25 @@ details p { color: var(--mute); margin: 8px 0 0; font-size: 0.95rem; }
 
 footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--mute); font-size: 0.9rem; text-align: center; }
 
-/* Scroll reveal: cards and FAQ ease in once, skipped under reduced-motion. */
+/* Pixel assets: native grid only, integer display, never smoothed. */
+.icon, .logo img, .divider { image-rendering: pixelated; }
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+/* Hero backdrop: local capture under the legibility gradient. */
+.hero {
+  background:
+    linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
+    url('assets/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+}
+/* Tiling section divider. */
+.divider { height: 16px; background: url('assets/divider-grass.png') repeat-x; }
+/* 9-patch frame on large primary buttons; nav keeps the flat fill. */
+.btn-primary:not(.btn-sm) {
+  border: 8px solid transparent;
+  border-image: url('assets/btn-9patch.png') 8;
+  border-radius: 0;
+}
+h3 img { vertical-align: middle; }
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .reveal.visible { opacity: 1; transform: none; }

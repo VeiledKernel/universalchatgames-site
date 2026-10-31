@@ -3,7 +3,11 @@
 // reduced-motion). Sticky header needs no shadow: the glass blur plus the
 // bottom hairline already separate it.
 (function () {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
   var targets = document.querySelectorAll('.feature-grid > article, details');
