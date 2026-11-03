@@ -97,7 +97,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .hero-inner { position: relative; z-index: 1; padding-block: 88px 64px; max-width: 640px; }
 /* Hero stage: band mode below 1100px (text first, scene block below, rows 140-270 at 2x, anchored right). */
-.hero-stage { position: relative; height: 260px; overflow: hidden; }
+.hero-stage { position: relative; height: 260px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 25%);
+  mask-image: linear-gradient(to bottom, transparent 0, black 25%);
+}
 .hero-stage img { position: absolute; image-rendering: pixelated; }
 .hero-stage .layer { width: 960px; height: 540px; right: 0; top: -280px; }
 .hero-stage .mascot { left: auto; right: 172px; top: 44px; width: 64px; height: 96px; }
@@ -107,7 +110,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .hero h1 { font-size: 32px; }
 }
 @media (min-width: 1100px) {
-  .hero-stage { position: absolute; right: 0; bottom: 0; width: 960px; height: 540px; overflow: visible; }
+  .hero-stage { position: absolute; right: 0; bottom: 0; width: 960px; height: 540px; overflow: visible;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 30%), linear-gradient(to bottom, transparent 0, black 25%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent 0, black 30%), linear-gradient(to bottom, transparent 0, black 25%);
+    mask-composite: intersect;
+  }
   .hero-stage .layer { width: 100%; height: 100%; right: auto; top: auto; left: 0; }
   .hero-stage .mascot { left: 75.42%; top: 60%; width: 6.67%; height: 17.78%; right: auto; }
   .hero-stage .plate { left: 76.25%; top: 55.19%; width: 5%; height: 4.44%; right: auto; }
@@ -143,8 +151,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   font-family: 'MinecraftFont', 'Press Start 2P', monospace;
   font-size: 0.72rem; line-height: 2;
   max-width: 640px; margin-top: 20px;
+  display: grid;
 }
 .chat-loop p { margin: 0; }
+.chat-round { grid-area: 1 / 1; }
+.chat-round[aria-hidden="true"] { visibility: hidden; }
 .badge {
   display: inline-block; border: 2px solid var(--amber); color: var(--amber);
   border-radius: 999px; padding: 6px 18px; margin-bottom: 20px;
@@ -182,6 +193,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .chat-frame {
   border: 8px solid transparent;
   border-image: url('assets/panel-chat.png') 8 fill;
+}
+/* Capture gallery: stacked images without JS; carousel once JS adds .is-gallery. */
+.gal-main { display: flex; align-items: center; gap: 12px; }
+.gal-frame { flex: 1 1 auto; min-width: 0; }
+.gal-frame .gal-slide { margin-bottom: 16px; }
+.gal-btn { min-width: 44px; min-height: 44px; flex-shrink: 0; }
+.gal-caption, .gal-count { text-align: center; }
+.gal-caption { font-weight: 700; margin: 12px 0 0; }
+.gal-count { color: var(--mute); margin: 4px 0 0; }
+.gallery.is-gallery .gal-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; touch-action: pan-y; }
+.gallery.is-gallery .gal-slide { position: absolute; inset: 0; margin: auto; width: auto; height: auto; max-width: 100%; max-height: 100%; opacity: 0; transition: opacity 150ms; }
+.gallery.is-gallery .gal-slide.is-on { opacity: 1; z-index: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .gallery.is-gallery .gal-slide { transition: none; }
 }
 .capture { display: block; width: auto; max-width: 100%; height: auto; image-rendering: pixelated; }
 .capture-large { margin-bottom: 16px; }

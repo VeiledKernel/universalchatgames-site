@@ -30,13 +30,14 @@
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <strong class="logo"><a href="index.html" style="color:inherit;text-decoration:none">UniversalChatGames</a></strong>
+    <strong class="logo"><img src="assets/logo-mark.png" width="32" height="32" alt="UniversalChatGames logo"><a href="index.html" style="color:inherit;text-decoration:none">UniversalChatGames</a></strong>
     <nav aria-label="Primary">
       <a href="index.html#features">Features</a>
       <a href="index.html#pricing">Pricing</a>
       <a href="index.html#setup">Setup</a>
       <a href="index.html#faq">FAQ</a>
       <a href="docs.html" aria-current="page">Docs</a>
+      <a href="changelog.html">Changelog</a>
     </nav>
     <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy<span class="btn-price"> — $9.99</span></a>
   </div>
@@ -48,10 +49,10 @@
   <h1>Docs</h1>
   <p class="lede">Install, commands, permissions, and every config key. One page, no hunting.</p>
 
-  <h2>Install</h2>
+  <h2 id="install">Install</h2>
   <ol class="steps">
     <li>Drop <code>universal-chatgames.jar</code> into <code>plugins/</code>.</li>
-    <li>Start the server once to generate <code>config.yml</code>, <code>messages.yml</code> and the <code>games/</code> folder.</li>
+    <li>Start the server once to generate <code>config.yml</code>.</li>
     <li>Optional: install Vault plus an economy backend. Without Vault, set <code>engine-settings.reward-fallback-command</code>.</li>
     <li>Restart. Console must show <code>UniversalChatGames enabled (scheduler: Bukkit)</code> on Spigot/Paper or <code>(scheduler: Folia)</code> on Folia.</li>
   </ol>
@@ -66,7 +67,7 @@
   </div>
 
   <h2>Config reference</h2>
-    <p class="sub">Settings live in three places: <code>config.yml</code> (engine, Bedrock, storage, Quizmaster, broadcasts), <code>games/</code> (each game's mechanics and rewards) and <code>messages.yml</code> (all player-facing text). Edit, save, then run <code>/chatgames reload</code> — no restart needed.</p>
+  <p class="sub">Everything lives in <code>config.yml</code>. Edit, save, then run <code>/chatgames reload</code> — no restart needed.</p>
   <div class="feature-grid">
     <article class="card">
       <h3>Round timing</h3>
@@ -82,14 +83,9 @@
     </article>
     <article class="card">
       <h3>Game modes</h3>
-      <p>Each game lives in <code>games/&lt;name&gt;.yml</code> with <code>enabled</code>, <code>display-name</code>, <code>min-players</code>, <code>rewards</code>, <code>weight</code> (pick chance), plus its own word, phrase, or question list. Announcement templates moved to <code>messages.yml</code> under <code>announcements.&lt;game&gt;</code>.</p>
+      <p>Each mode has <code>enabled</code>, <code>min-players</code>, <code>rewards</code>, <code>weight</code> (pick chance), and <code>announcement-format</code>, plus its own word, phrase, or question list.</p>
       <p>A <code>rewards</code> list holds money entries (<code>min</code>, <code>max</code>, optional <code>weight</code> and <code>display</code>) and command entries (<code>command</code>, <code>display</code>, optional <code>weight</code>); one is rolled per round and <code>%reward%</code> in <code>announcement-format</code> shows it. The old <code>reward-amount</code> still works as one fixed amount.</p>
       <p>Trivia lines look like this: <code>What year did Minecraft 1.0 release?|2011|easy</code> — question, pipe, exact answer, and an optional |easy, |medium or |hard tier.</p>
-    </article>
-    <article class="card">
-      <h3>Winner messages</h3>
-      <p><code>winner.mode</code> picks TITLE, CHAT, BOTH or NONE. New installs show a title.</p>
-      <p><code>winner.title</code> and <code>winner.subtitle</code> accept <code>%game%</code> and <code>%reward%</code>; <code>winner.title-times</code> is "fadeIn,stay,fadeOut" in ticks.</p>
     </article>
     <article class="card">
       <h3>Quizmaster event</h3>
@@ -122,6 +118,7 @@
       <a href="index.html#setup">Setup</a>
       <a href="index.html#faq">FAQ</a>
       <a href="docs.html">Docs</a>
+      <a href="changelog.html">Changelog</a>
     </nav>
     UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
   </div>

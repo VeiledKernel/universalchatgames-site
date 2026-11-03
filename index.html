@@ -37,6 +37,7 @@
       <a href="#setup">Setup</a>
       <a href="#faq">FAQ</a>
       <a href="docs.html">Docs</a>
+      <a href="changelog.html">Changelog</a>
     </nav>
     <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy<span class="btn-price"> — $9.99</span></a>
   </div>
@@ -53,9 +54,16 @@
       <a class="btn btn-ghost" href="#setup">Setup in 3 steps</a>
     </div>
     <div class="chat-loop" id="chatLoop">
-      <p><span class="mc-red">[MATH FLASH]</span> <span class="mc-white">Quick! What is </span><span class="mc-yellow">43 * 100</span><span class="mc-white">? Prize: </span><span class="mc-green">$350</span></p>
-      <p><span class="mc-gray">&lt;Player&gt; 4300</span></p>
-      <p><span class="mc-green">You won! Reward: $350</span></p>
+      <div class="chat-round">
+        <p><span class="mc-red">[MATH FLASH]</span> <span class="mc-white">Quick! What is </span><span class="mc-yellow">43 * 100</span><span class="mc-white">? Prize: </span><span class="mc-green">$350</span></p>
+        <p><span class="mc-gray">&lt;Player&gt; 4300</span></p>
+        <p><span class="mc-green">You won! Reward: $350</span></p>
+      </div>
+      <div class="chat-round" aria-hidden="true">
+        <p><span class="mc-red">[TRIVIA]</span> <span class="mc-white">What year did Minecraft 1.0 release? Prize: </span><span class="mc-green">$400</span></p>
+        <p><span class="mc-gray">&lt;Player&gt; 2011</span></p>
+        <p><span class="mc-green">You won! Reward: $400</span></p>
+      </div>
     </div>
     <p class="hero-proof">Atomic single-winner lock — simultaneous answers pay exactly one player.</p>
   </div>
@@ -125,14 +133,22 @@
 <section id="captures" class="wrap section">
   <h2>How a round looks</h2>
   <p class="sub">Real rounds, real payouts.</p>
-  <div class="capture-grid">
-    <div class="chat-frame"><img class="capture" src="assets/capture-math-win.png" width="659" height="63" alt="Math Flash round: 43 times 100 for a 350 reward, player answers 4300 and wins"></div>
-    <div class="chat-frame"><img class="capture" src="assets/capture-unscramble-win.png" width="670" height="55" alt="Word Unscramble round for a 400 reward, player answers and wins"></div>
-    <div class="chat-frame"><img class="capture" src="assets/capture-typing-win.png" width="673" height="75" alt="Typing Speed round for a 600 reward, player answers and wins"></div>
-    <div class="chat-frame"><img class="capture" src="assets/capture-trivia-win.png" width="657" height="60" alt="Trivia round asking which year Minecraft 1.0 released for a 400 reward, player answers 2011 and wins"></div>
+  <div class="gallery" id="captureGallery" role="region" aria-roledescription="carousel" aria-label="Round captures">
+    <div class="gal-main">
+      <button class="btn btn-primary btn-sm gal-btn gal-prev" type="button" aria-label="Previous capture">‹</button>
+      <div class="chat-frame gal-frame">
+        <img class="capture gal-slide" src="assets/capture-quizmaster-villager.png" width="858" height="480" alt="Wandering Quizmaster villager with its orange nameplate, standing by the water in daylight">
+        <img class="capture gal-slide" src="assets/capture-quizmaster-win.png" width="657" height="57" alt="Quizmaster round for a 642 reward, player answers and wins">
+        <img class="capture gal-slide" src="assets/capture-math-win.png" width="659" height="63" alt="Math Flash round: 43 times 100 for a 350 reward, player answers 4300 and wins">
+        <img class="capture gal-slide" src="assets/capture-unscramble-win.png" width="670" height="55" alt="Word Unscramble round for a 400 reward, player answers and wins">
+        <img class="capture gal-slide" src="assets/capture-typing-win.png" width="673" height="75" alt="Typing Speed round for a 600 reward, player answers and wins">
+        <img class="capture gal-slide" src="assets/capture-trivia-win.png" width="657" height="60" alt="Trivia round asking which year Minecraft 1.0 released for a 400 reward, player answers 2011 and wins">
+      </div>
+      <button class="btn btn-primary btn-sm gal-btn gal-next" type="button" aria-label="Next capture">›</button>
+    </div>
+    <p class="gal-caption" id="galCaption">Quizmaster</p>
+    <p class="gal-count" id="galCount" aria-live="polite">1 / 6</p>
   </div>
-  <div class="chat-frame capture-large"><img class="capture" src="assets/capture-quizmaster-villager.png" width="858" height="480" alt="Wandering Quizmaster villager with its orange nameplate, standing by the water in daylight"></div>
-  <div class="chat-frame"><img class="capture" src="assets/capture-quizmaster-win.png" width="657" height="57" alt="Quizmaster round for a 642 reward, player answers and wins"></div>
 </section>
 
 <section id="rewards" class="wrap section">
@@ -153,6 +169,7 @@
   <h2>Get UniversalChatGames</h2>
   <p class="sub">One purchase, every future 1.x update included.</p>
   <div class="pricing-wrap">
+    <img class="pricing-mascot" src="assets/mascot-full-point.png" width="128" height="192" alt="">
     <div class="checkout-card">
       <span class="badge">Lifetime access</span>
       <div class="price"><span class="currency">$</span>9.99</div>
@@ -165,7 +182,6 @@
       <a class="btn btn-primary btn-block" href="https://builtbybit.com/resources/universalchatgames.127513/">Checkout on BuiltByBit</a>
       <p class="checkout-note">Secure checkout via BuiltByBit · Java 21+ (25 for 26.x)</p>
     </div>
-    <img class="pricing-mascot" src="assets/mascot-full-point.png" width="128" height="192" alt="">
   </div>
 </section>
 
@@ -199,6 +215,7 @@
       <a href="#setup">Setup</a>
       <a href="#faq">FAQ</a>
       <a href="docs.html">Docs</a>
+      <a href="changelog.html">Changelog</a>
     </nav>
     UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
   </div>

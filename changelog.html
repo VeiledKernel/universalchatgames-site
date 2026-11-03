@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — UniversalChatGames</title>
+<meta name="description" content="Release notes for every UniversalChatGames version.">
+<link rel="canonical" href="https://universalchatgames.netlify.app/changelog.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UniversalChatGames">
+<meta property="og:title" content="Changelog — UniversalChatGames">
+<meta property="og:description" content="Release notes for every UniversalChatGames version.">
+<meta property="og:url" content="https://universalchatgames.netlify.app/changelog.html">
+<meta property="og:image" content="https://universalchatgames.netlify.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="UniversalChatGames: Dead chat kills servers. A pixel-art night scene with the Quizmaster.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0d0e12">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="font.ttf" as="font" type="font/ttf" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <strong class="logo"><img src="assets/logo-mark.png" width="32" height="32" alt="UniversalChatGames logo"><a href="index.html" style="color:inherit;text-decoration:none">UniversalChatGames</a></strong>
+    <nav aria-label="Primary">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#setup">Setup</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="docs.html">Docs</a>
+      <a href="changelog.html" aria-current="page">Changelog</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy<span class="btn-price"> — $9.99</span></a>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="section">
+  <p class="sub">UNIVERSALCHATGAMES · v1.4</p>
+  <h1>Changelog</h1>
+  <p class="lede">What changed in each release.</p>
+
+  <article class="card">
+    <h2>1.4.0 <span class="badge">Latest</span></h2>
+    <ul>
+      <li>Reward pools: each game can list several rewards. One is rolled per round by weight. Money rewards scale between min and max with question difficulty. Command rewards run once from console, with %player% or {player} replaced by the winner's name.</li>
+      <li>Announcements show the exact prize through %reward%, and the winner message is configurable as engine-settings.win-message.</li>
+      <li>Trivia lines can end in |easy, |medium or |hard, so harder questions pay more.</li>
+      <li>Quizmaster's reward-multiplier now applies to money rewards only. Command rewards are unchanged.</li>
+      <li>Invalid reward entries are skipped with a numbered warning in the log. A game with no valid rewards is left out of rotation, and /chatgames audit flags it.</li>
+      <li>Upgrading: config.yml is never rewritten, so existing servers keep their file, and the old reward-amount still pays its exact value. To show the prize in announcements, add %reward% to your announcement-format lines, or compare against the new default config.</li>
+      <li>The Quizmaster villager is never saved to the world, so a restart during a round cannot leave it behind.</li>
+      <li>A negative or non-finite legacy reward-amount now disables that game's rewards, so it is never picked; /chatgames audit flags the game.</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>1.3.0</h2>
+    <ul>
+      <li>Wandering Quizmaster event: chance-based Villager spawns near a random player asking multiplied-reward questions (opt-in, off by default).</li>
+      <li>Per-player Bedrock buffer: late Bedrock answers win inside a grace window after the global timeout.</li>
+      <li><code>/chatgames audit</code> operator diagnostic plus native command suggestions on Paper.</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>1.2.0</h2>
+    <ul>
+      <li>Trivia question bank and Guess-the-Number modes with per-mode weights.</li>
+      <li>Admin force-start and skip, player mute toggle, world blacklist.</li>
+      <li>Optional SQLite win tracking with fastest-time records and break announcements.</li>
+      <li>Bedrock-aware timeout extension when a Bedrock player is online.</li>
+      <li>Optional "Too slow!" feedback for late correct answers, capped per round.</li>
+      <li>Real Floodgate detection for Bedrock players with safe fallback.</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>1.0.0</h2>
+    <p>Public release. Native Paper and Folia support. Multithreaded chat engagement engine with no main-thread lag and no database.</p>
+    <h3>Chat games</h3>
+    <ul>
+      <li>Math Flash: random arithmetic challenges (addition, subtraction, multiplication) in chat.</li>
+      <li>Word Unscramble: random entries from your word list, shuffled, first to unscramble wins.</li>
+      <li>Typing Speed: custom phrases with response tracking and optional Exact Match Mode (punctuation, spacing, casing).</li>
+    </ul>
+    <h3>Smart broadcasts</h3>
+    <ul>
+      <li>Condition-based announcements instead of fixed-interval spam.</li>
+      <li>TPS triggers dispatch optimization tips only when performance drops.</li>
+      <li>Player-count minimums gate games and broadcasts on empty servers.</li>
+    </ul>
+    <h3>Mobile balance</h3>
+    <ul>
+      <li>Typing-time buffer for Bedrock (GeyserMC) players so touchscreen users are not out-competed by PC typists.</li>
+    </ul>
+    <h3>Concurrency</h3>
+    <ul>
+      <li>Atomic single-winner lock: simultaneous correct answers across regions pay exactly one winner. Double payouts impossible by construction.</li>
+      <li>Vault integration with console-command fallback when no economy is installed.</li>
+    </ul>
+    <h3>Text and reload</h3>
+    <ul>
+      <li>Native Adventure MiniMessage gradients, no legacy codes required.</li>
+      <li><code>/chatgames reload</code> applies config mid-game without locking the server.</li>
+    </ul>
+    <p>Install: drop the jar in <code>plugins/</code> — see the <a href="docs.html#install">install steps</a>.</p>
+  </article>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#setup">Setup</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="docs.html">Docs</a>
+      <a href="changelog.html" aria-current="page">Changelog</a>
+    </nav>
+    UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

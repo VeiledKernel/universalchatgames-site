@@ -37,17 +37,92 @@
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
-  var rounds = [
-    '<p><span class="mc-red">[MATH FLASH]</span> <span class="mc-white">Quick! What is </span><span class="mc-yellow">43 * 100</span><span class="mc-white">? Prize: </span><span class="mc-green">$350</span></p>' +
-    '<p><span class="mc-gray">&lt;Player&gt; 4300</span></p>' +
-    '<p><span class="mc-green">You won! Reward: $350</span></p>',
-    '<p><span class="mc-red">[TRIVIA]</span> <span class="mc-white">What year did Minecraft 1.0 release? Prize: </span><span class="mc-green">$400</span></p>' +
-    '<p><span class="mc-gray">&lt;Player&gt; 2011</span></p>' +
-    '<p><span class="mc-green">You won! Reward: $400</span></p>'
-  ];
+  var rounds = Array.prototype.slice.call(box.querySelectorAll('.chat-round'));
   var i = 0;
   setInterval(function () {
+    rounds[i].setAttribute('aria-hidden', 'true');
     i = (i + 1) % rounds.length;
-    box.innerHTML = rounds[i];
+    rounds[i].removeAttribute('aria-hidden');
   }, 3600);
+})();
+
+// Capture gallery: manual carousel, no autoplay. Without this script the
+// slides stay stacked. Wraps from last slide back to the first.
+(function () {
+  var gal = document.getElementById('captureGallery');
+  if (!gal) {
+    return;
+  }
+  var slides = Array.prototype.slice.call(gal.querySelectorAll('.gal-slide'));
+  if (!slides.length) {
+    return;
+  }
+  var caption = document.getElementById('galCaption');
+  var count = document.getElementById('galCount');
+  var captions = ['Quizmaster', 'Quizmaster win', 'Math Flash', 'Word Unscramble', 'Typing Speed', 'Trivia'];
+  var current = 0;
+  gal.classList.add('is-gallery');
+  function show(n) {
+    slides[current].classList.remove('is-on');
+    slides[current].setAttribute('aria-hidden', 'true');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('is-on');
+    slides[current].removeAttribute('aria-hidden');
+    if (caption) {
+      caption.textContent = captions[current] || ('Slide ' + (current + 1));
+    }
+    if (count) {
+      count.textContent = (current + 1) + ' / ' + slides.length;
+    }
+  }
+  slides.forEach(function (s, k) {
+    if (k === 0) {
+      s.classList.add('is-on');
+      s.removeAttribute('aria-hidden');
+    } else {
+      s.setAttribute('aria-hidden', 'true');
+    }
+  });
+  var prev = gal.querySelector('.gal-prev');
+  var next = gal.querySelector('.gal-next');
+  if (prev) {
+    prev.addEventListener('click', function () { show(current - 1); });
+  }
+  if (next) {
+    next.addEventListener('click', function () { show(current + 1); });
+  }
+  gal.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      show(current - 1);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      show(current + 1);
+    }
+  });
+  var frame = gal.querySelector('.gal-frame');
+  var startX = null;
+  var startY = null;
+  if (frame) {
+    frame.addEventListener('pointerdown', function (event) {
+      startX = event.clientX;
+      startY = event.clientY;
+    });
+    frame.addEventListener('pointerup', function (event) {
+      if (startX === null) {
+        return;
+      }
+      var dx = event.clientX - startX;
+      var dy = event.clientY - startY;
+      startX = null;
+      startY = null;
+      if (Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy)) {
+        show(current + (dx < 0 ? 1 : -1));
+      }
+    });
+    frame.addEventListener('pointercancel', function () {
+      startX = null;
+      startY = null;
+    });
+  }
 })();

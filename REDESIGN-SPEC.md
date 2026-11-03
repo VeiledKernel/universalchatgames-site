@@ -140,6 +140,25 @@ Type: Press Start 2P only for the h1, h2, badges and buttons, at 16/24/32/40px. 
 
 ---
 
+## Site todo (after the redesign went live, 2026-11-03)
+1. Pricing section: the Quizmaster mascot goes on the LEFT of the price card, pointing right at it (`mascot-full-point.png` unmirrored). If the `scaleX(-1)` mirror from the live-site fix prompt landed, remove it when moving the mascot. On phones it stays hidden.
+2. Retake the round captures without the "ChatGames round started" admin line (Felix, in game).
+3. Add the Quizmaster fix and the bad `reward-amount` behaviour to the 1.4.0 section of `docs/marketplace/CHANGELOG.md` on both branches.
+4. Before the 1.4 BuiltByBit upload: `bbb-header.png` and `bbb-cta.png` still say v1.3 and use the old logo colours.
+5. Netlify adds a "Powered by Netlify" badge over the bottom-right corner; check the site settings for a way to turn it off.
+6. "How a round looks" becomes a gallery instead of a stacked list:
+   - One slide visible at a time inside a panel-chat frame, with a caption under it ("Math Flash", "Quizmaster" …) and a counter ("2 / 6").
+   - Prev/next pixel buttons on both sides. Left/right arrow keys work when the gallery has focus, and swipe works on touch.
+   - No autoplay. The slide change is instant under `prefers-reduced-motion`.
+   - Without JS, every slide shows as today's stacked list.
+   - Every slide has the same size, so the frame never jumps. That pairs with item 2: retake each round as a full 16:9 screenshot with the chat visible, at one resolution (e.g. 1280×720), instead of the current mix of thin chat strips (659×63) and one 858×480 shot.
+   - Order: Quizmaster first, then Math, Unscramble, Typing, Trivia, Guess.
+7. The hero chat loop (#chatLoop) changes height when it switches rounds: the Trivia question wraps to more lines than the Math one, so everything below jumps every 3.6s.
+   - Fix: put every round in the HTML, stacked in the same CSS grid cell (`display: grid` on the box, `grid-area: 1 / 1` on each round). Show one at a time with `visibility`, so the box always takes the tallest round's height at any width.
+   - `app.js` only toggles which round is visible instead of rewriting innerHTML.
+   - Without JS or with reduced motion, the Math round shows.
+   - Check: the box height stays the same across both rounds at 1440, 1100, 760 and 375px.
+
 ## Order of work
 1. ~~Finish Part A.~~ Done, except A3 (during the wire-up) and A8 (Felix decides).
 2. ~~Draw C1 and the C2 idle pose.~~ Done.
