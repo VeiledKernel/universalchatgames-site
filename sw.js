@@ -39,7 +39,7 @@ self.addEventListener('fetch', function (event) {
       fetch(event.request).then(function (response) {
         if (response.ok) {
           var copy = response.clone();
-          caches.open(CACHE).then(function (cache) { cache.put(event.request, copy); });
+          caches.open(CACHE).then(function (cache) { return cache.put(event.request, copy); }).catch(function () {});
         }
         return response;
       }).catch(function () {

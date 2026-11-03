@@ -22,7 +22,6 @@
 }
 * { box-sizing: border-box; }
 html, body { overflow-x: clip; }
-.header-inner { flex-wrap: wrap; row-gap: 10px; }
 pre { max-width: 100%; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
@@ -60,8 +59,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
-.logo { font-size: 1rem; }
+.header-inner { display: flex; flex-wrap: wrap; row-gap: 10px; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-size: 1rem; }
 .site-header nav { display: flex; gap: 20px; font-size: 0.9rem; }
 .site-header nav a { color: var(--mute); text-decoration: none; }
 .site-header nav a:hover { color: #fff; }
@@ -250,7 +249,6 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--m
 
 /* Pixel assets: native grid only, integer display, never smoothed. */
 .icon, .logo img, .divider { image-rendering: pixelated; }
-.logo { display: inline-flex; align-items: center; gap: 10px; }
 /* Tiling section dividers, 2x. */
 .divider { height: 32px; background-repeat: repeat-x; background-size: 32px 32px; image-rendering: pixelated; }
 .divider-grass { background-image: url('assets/divider-grass.png'); }

@@ -7,7 +7,8 @@
     addEventListener('load', function () {
       navigator.serviceWorker.register('sw.js').catch(function () {});
     });
-  }  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }
   var targets = document.querySelectorAll('.feature-grid > article, details');
