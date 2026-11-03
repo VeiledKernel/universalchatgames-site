@@ -39,15 +39,12 @@ body {
 h1, .badge, .btn-primary {
   font-family: 'MinecraftFont', 'Press Start 2P', monospace;
 }
-h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.4; }
-.badge, .btn-primary { font-size: 0.8rem; letter-spacing: 0.04em; }
+h1 { font-size: 24px; line-height: 1.4; }
+@media (min-width: 600px) { h1 { font-size: 32px; } }
+@media (min-width: 900px) { h1 { font-size: 40px; } }
+.badge, .btn-primary { font-size: 16px; letter-spacing: 0.04em; }
 .badge-sm { font-size: 0.6rem; padding: 3px 10px; margin-left: 8px; vertical-align: middle; }
-/* Concept mockups: game-chat panels, clearly labeled as mockups in copy. */
-.mc-chat {
-  background: rgba(0, 0, 0, 0.55); border: 1px solid var(--line);
-  border-radius: 10px; padding: 18px; font-family: 'MinecraftFont', 'Press Start 2P', monospace;
-  font-size: 0.72rem; line-height: 2;
-}
+/* Minecraft chat colours for the hero round loop. */
 .mc-chat p { margin: 0; }
 .mc-white { color: #fff; } .mc-gray { color: #aaa; } .mc-green { color: #5f5; }
 .mc-yellow { color: #ff5; } .mc-gold { color: #fa0; } .mc-red { color: #f55; }
@@ -71,7 +68,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* Buttons: amber fills act, ghost outlines defer. One primary CTA per viewport. */
 .btn { display: inline-block; padding: 14px 30px; border-radius: 10px; font-weight: 700; text-decoration: none; }
-.btn-sm { padding: 8px 16px; }
+.btn-sm { padding: 10px 16px; }
+@media (max-width: 600px) {
+  .site-header nav { display: none; }
+  .header-inner { gap: 10px; }
+  .logo { font-size: 0.7rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .logo img { width: 24px; height: 24px; }
+  .site-header .btn-sm { padding: 10px 12px; }
+  .btn-price { display: none; }
+}
+.footer-nav { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+.footer-nav a { color: var(--mute); text-decoration: none; }
 .btn-block { display: block; text-align: center; }
 .btn-primary { background: var(--amber); color: var(--on-amber); }
 .btn-primary:hover { filter: brightness(1.08); }
@@ -80,13 +87,64 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* Hero: CSS-composed backdrop (gradient over optional artwork) so text
    legibility never depends on a photo. */
 .hero {
+  position: relative;
+  overflow: hidden;
   background:
     linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
     var(--hero-bg);
   background-size: cover;
   background-position: center;
 }
-.hero-inner { padding: 88px 0 64px; max-width: 640px; }
+.hero-inner { position: relative; z-index: 1; padding-block: 88px 64px; max-width: 640px; }
+/* Hero stage: band mode below 1100px (text first, scene block below, rows 140-270 at 2x, anchored right). */
+.hero-stage { position: relative; height: 260px; overflow: hidden; }
+.hero-stage img { position: absolute; image-rendering: pixelated; }
+.hero-stage .layer { width: 960px; height: 540px; right: 0; top: -280px; }
+.hero-stage .mascot { left: auto; right: 172px; top: 44px; width: 64px; height: 96px; }
+.hero-stage .plate { left: auto; right: 180px; top: 18px; width: 48px; height: 24px; }
+/* Overlay mode: stage behind the hero, anchored bottom-right, whole-number scale. */
+@media (min-width: 1100px) and (max-width: 1199px) {
+  .hero h1 { font-size: 32px; }
+}
+@media (min-width: 1100px) {
+  .hero-stage { position: absolute; right: 0; bottom: 0; width: 960px; height: 540px; overflow: visible; }
+  .hero-stage .layer { width: 100%; height: 100%; right: auto; top: auto; left: 0; }
+  .hero-stage .mascot { left: 75.42%; top: 60%; width: 6.67%; height: 17.78%; right: auto; }
+  .hero-stage .plate { left: 76.25%; top: 55.19%; width: 5%; height: 4.44%; right: auto; }
+  .hero-inner {
+    margin-left: max(24px, calc((100% - 1024px) / 2 + 24px));
+    margin-right: auto;
+    max-width: calc(100% - 432px - 24px - max(24px, (100% - 1024px) / 2 + 24px));
+  }
+}
+@media (min-width: 1600px) {
+  .hero-stage { width: 1440px; height: 810px; }
+  .hero-inner { max-width: calc(100% - 648px - 24px - max(24px, (100% - 1024px) / 2 + 24px)); }
+}
+.hero-stage .sky { opacity: 0; animation: skyCycle 1s steps(1) infinite; }
+.hero-stage .sky.s1 { opacity: 1; }
+.hero-stage .sky.s2 { animation-delay: -0.75s; }
+.hero-stage .sky.s3 { animation-delay: -0.5s; }
+.hero-stage .sky.s4 { animation-delay: -0.25s; }
+@keyframes skyCycle { 0% { opacity: 1; } 25% { opacity: 0; } 100% { opacity: 0; } }
+.hero-stage .torch { opacity: 0; animation: skyCycle 1s steps(1) infinite; }
+.hero-stage .torch.t1 { opacity: 1; }
+.hero-stage .torch.t2 { animation-delay: -0.75s; }
+.hero-stage .torch.t3 { animation-delay: -0.5s; }
+.hero-stage .torch.t4 { animation-delay: -0.25s; }
+.hero-stage .mascot.f1 { animation: idleA 1.35s steps(1) infinite; }
+.hero-stage .mascot.f2 { opacity: 0; animation: idleB 1.35s steps(1) infinite; }
+@keyframes idleA { 0%, 88.88% { opacity: 1; } 88.89%, 100% { opacity: 0; } }
+@keyframes idleB { 0%, 88.8% { opacity: 0; } 88.9%, 100% { opacity: 1; } }
+/* Hero chat loop: real round lines in a panel-chat frame. */
+.chat-loop {
+  border: 16px solid transparent;
+  border-image: url('assets/panel-chat.png') 8 fill;
+  font-family: 'MinecraftFont', 'Press Start 2P', monospace;
+  font-size: 0.72rem; line-height: 2;
+  max-width: 640px; margin-top: 20px;
+}
+.chat-loop p { margin: 0; }
 .badge {
   display: inline-block; border: 2px solid var(--amber); color: var(--amber);
   border-radius: 999px; padding: 6px 18px; margin-bottom: 20px;
@@ -96,7 +154,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .hero-proof { color: var(--mute); font-size: 0.9rem; margin-top: 18px; }
 
 /* Sections: generous rhythm, no dividers. */
-.section { padding: 56px 0; }
+.section { padding-block: 56px; }
 .section h2 { font-size: 1.5rem; margin: 0 0 8px; }
 .sub { color: var(--mute); margin: 0 0 28px; max-width: 640px; }
 
@@ -105,23 +163,39 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 @media (max-width: 800px) { .feature-grid { grid-template-columns: 1fr; } }
 .card {
-  background: var(--card); border: 1px solid var(--line);
-  border-top: 3px solid var(--line); border-radius: 12px; padding: 22px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--card);
+  border: 8px solid transparent;
+  border-image: url('assets/panel-stone.png') 8 fill;
+  padding: 22px;
+  transition: box-shadow 0.2s ease;
 }
 .card:hover {
-  border-color: var(--amber);
-  box-shadow: 0 0 0 1px var(--amber), 0 0 24px rgba(245, 179, 1, 0.15);
+  box-shadow: 0 0 24px rgba(245, 179, 1, 0.15);
 }
 .card h3 { margin: 12px 0 8px; font-size: 1.05rem; }
 .card p { color: var(--mute); font-size: 0.92rem; margin: 0; }
-.icon { width: 32px; height: 32px; }
+.icon { width: 48px; height: 48px; }
+.quizmaster-card { grid-column: 1 / -1; outline: 2px solid var(--violet); display: flex; gap: 18px; align-items: center; }
+.quiz-mascot { width: 96px; height: 144px; image-rendering: pixelated; flex-shrink: 0; }
+/* Captures: real rounds in panel-chat frames. */
+.capture-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 16px; justify-items: center; }
+.chat-frame {
+  border: 8px solid transparent;
+  border-image: url('assets/panel-chat.png') 8 fill;
+}
+.capture { display: block; width: auto; max-width: 100%; height: auto; image-rendering: pixelated; }
+.capture-large { margin-bottom: 16px; }
 
 /* Checkout: one centered tier, the page's conversion focal point. */
+.pricing-wrap { display: flex; gap: 32px; align-items: center; justify-content: center; }
+.pricing-mascot { width: 128px; height: 192px; image-rendering: pixelated; flex-shrink: 0; }
+@media (max-width: 759px) { .pricing-mascot { display: none; } }
 .checkout-card {
-  max-width: 420px; margin: 0 auto; text-align: center;
-  background: var(--card); border: 1px solid var(--amber);
-  border-radius: 16px; padding: 36px 32px;
+  max-width: 420px; text-align: center;
+  background: var(--card);
+  border: 8px solid transparent;
+  border-image: url('assets/panel-stone.png') 8 fill;
+  padding: 36px 32px;
 }
 .price { font-size: 3rem; font-weight: 700; margin: 16px 0; }
 .price .currency { font-size: 1.5rem; vertical-align: top; }
@@ -131,10 +205,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* Steps, code, FAQ. */
 .steps { padding-left: 22px; max-width: 640px; }
+.reward-list { list-style: none; padding-left: 0; max-width: 640px; }
+.reward-list li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+.reward-list .chip { width: 24px; height: 24px; image-rendering: pixelated; flex-shrink: 0; }
+.reward-list li:last-child { padding-left: 36px; }
 .steps li { margin-bottom: 14px; }
 .steps li::marker { color: var(--amber); font-weight: 700; }
 code { background: var(--codebg); padding: 2px 8px; border-radius: 6px; font-size: 0.9em; }
-details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; }
+details {
+  background: var(--card);
+  border: 8px solid transparent;
+  border-image: url('assets/panel-stone.png') 8 fill;
+  padding: 14px 18px; margin-bottom: 10px;
+}
 summary { font-weight: 700; cursor: pointer; }
 details p { color: var(--mute); margin: 8px 0 0; font-size: 0.95rem; }
 
@@ -143,21 +226,23 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--m
 /* Pixel assets: native grid only, integer display, never smoothed. */
 .icon, .logo img, .divider { image-rendering: pixelated; }
 .logo { display: inline-flex; align-items: center; gap: 10px; }
-/* Hero backdrop: local capture under the legibility gradient. */
-.hero {
-  background:
-    linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
-    url('assets/hero-bg.png');
-  background-size: cover;
-  background-position: center;
-}
-/* Tiling section divider. */
-.divider { height: 16px; background: url('assets/divider-grass.png') repeat-x; }
-/* 9-patch frame on large primary buttons; nav keeps the flat fill. */
+/* Tiling section dividers, 2x. */
+.divider { height: 32px; background-repeat: repeat-x; background-size: 32px 32px; image-rendering: pixelated; }
+.divider-grass { background-image: url('assets/divider-grass.png'); }
+.divider-stone { background-image: url('assets/divider-stone.png'); }
+.divider-dirt { background-image: url('assets/divider-dirt.png'); }
+/* 9-patch frames on large primary buttons; nav keeps the flat fill. */
 .btn-primary:not(.btn-sm) {
   border: 8px solid transparent;
-  border-image: url('assets/btn-9patch.png') 8;
+  border-image: url('assets/btn-normal.png') 8 fill;
   border-radius: 0;
+  filter: none;
+}
+.btn-primary:not(.btn-sm):hover {
+  border-image-source: url('assets/btn-hover.png');
+}
+.btn-primary:not(.btn-sm):active {
+  border-image-source: url('assets/btn-pressed.png');
 }
 h3 img { vertical-align: middle; }
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
@@ -177,24 +262,8 @@ h3 img { vertical-align: middle; }
 .card:hover .icon[src="assets/icon-guess.png"] { content: url('assets/icon-guess-lit.png'); }
 .card:hover .icon[src="assets/icon-broadcast.png"] { content: url('assets/icon-broadcast-lit.png'); }
 
-/* Hero shimmer: frame A/B swap every 900ms, discrete steps. */
-@keyframes heroShimmer {
-  0%, 49.9% {
-    background:
-      linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
-      url('assets/hero-bg.png');
-    background-size: cover;
-    background-position: center;
-  }
-  50%, 100% {
-    background:
-      linear-gradient(to bottom, rgba(13, 14, 18, 0.6), var(--bg)),
-      url('assets/hero-bg-b.png');
-    background-size: cover;
-    background-position: center;
-  }
-}
-.hero { animation: heroShimmer 1.8s steps(1) infinite; }
 @media (prefers-reduced-motion: reduce) {
   .hero { animation: none; }
+  .hero-stage .sky, .hero-stage .torch, .hero-stage .mascot.f1, .hero-stage .mascot.f2 { animation: none; }
+  .hero-stage .alt { display: none; }
 }

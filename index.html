@@ -3,17 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UniversalChatGames v1.3 — Chat minigames for Spigot, Paper &amp; Folia</title>
+<title>UniversalChatGames v1.4 — Chat minigames for Spigot, Paper &amp; Folia</title>
 <meta name="description" content="Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia.">
+<link rel="canonical" href="https://universalchatgames.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UniversalChatGames">
+<meta property="og:title" content="UniversalChatGames — chat minigames for Spigot, Paper &amp; Folia">
+<meta property="og:description" content="Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia.">
+<meta property="og:url" content="https://universalchatgames.netlify.app/">
+<meta property="og:image" content="https://universalchatgames.netlify.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="UniversalChatGames: Dead chat kills servers. A pixel-art night scene with the Quizmaster.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d0e12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="font.ttf" as="font" type="font/ttf" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,100 +38,134 @@
       <a href="#faq">FAQ</a>
       <a href="docs.html">Docs</a>
     </nav>
-    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy — $9.99</a>
+    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy<span class="btn-price"> — $9.99</span></a>
   </div>
 </header>
 
 <main>
 <section class="hero">
   <div class="wrap hero-inner">
-    <span class="badge">v1.3 Ready</span>
+    <span class="badge">v1.4 Ready</span>
     <h1>Dead chat kills servers.</h1>
     <p class="lede">Five live chat games plus smart broadcasts. One jar for Spigot, Paper, and Folia. Zero required database.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy Now — $9.99</a>
       <a class="btn btn-ghost" href="#setup">Setup in 3 steps</a>
     </div>
+    <div class="chat-loop" id="chatLoop">
+      <p><span class="mc-red">[MATH FLASH]</span> <span class="mc-white">Quick! What is </span><span class="mc-yellow">43 * 100</span><span class="mc-white">? Prize: </span><span class="mc-green">$350</span></p>
+      <p><span class="mc-gray">&lt;Player&gt; 4300</span></p>
+      <p><span class="mc-green">You won! Reward: $350</span></p>
+    </div>
     <p class="hero-proof">Atomic single-winner lock — simultaneous answers pay exactly one player.</p>
+  </div>
+  <div class="hero-stage" aria-hidden="true">
+    <img class="layer sky s1" src="assets/hero-sky-f1.png" width="480" height="270" alt="">
+    <img class="layer sky alt s2" src="assets/hero-sky-f2.png" width="480" height="270" alt="">
+    <img class="layer sky alt s3" src="assets/hero-sky-f3.png" width="480" height="270" alt="">
+    <img class="layer sky alt s4" src="assets/hero-sky-f4.png" width="480" height="270" alt="">
+    <img class="layer" src="assets/hero-far.png" width="480" height="270" alt="">
+    <img class="layer" src="assets/hero-near.png" width="480" height="270" alt="">
+    <img class="layer torch t1" src="assets/hero-torch-f1.png" width="480" height="270" alt="">
+    <img class="layer torch alt t2" src="assets/hero-torch-f2.png" width="480" height="270" alt="">
+    <img class="layer torch alt t3" src="assets/hero-torch-f3.png" width="480" height="270" alt="">
+    <img class="layer torch alt t4" src="assets/hero-torch-f4.png" width="480" height="270" alt="">
+    <img class="mascot f1" src="assets/mascot-full-idle-f1.png" width="32" height="48" alt="">
+    <img class="mascot alt f2" src="assets/mascot-full-idle-f2.png" width="32" height="48" alt="">
+    <img class="plate" src="assets/nameplate.png" width="24" height="12" alt="">
   </div>
 </section>
 
-<div class="divider" role="presentation"></div>
+<div class="divider divider-grass" role="presentation"></div>
 
 <section id="features" class="wrap section">
-  <h2>Five games, one loop</h2>
+  <h2>Five chat games, plus broadcasts and the Quizmaster</h2>
   <p class="sub">Weighted rotation across enabled modes. Disabled modes never stall a round.</p>
   <div class="feature-grid">
     <article class="card">
-      <img class="icon" src="assets/icon-math.png" width="32" height="32" alt="">
+      <img class="icon" src="assets/icon-math.png" width="48" height="48" alt="Math Flash icon">
       <h3>Math Flash</h3>
       <p>Generated arithmetic, first correct answer wins.</p>
     </article>
     <article class="card">
-      <img class="icon" src="assets/icon-unscramble.png" width="32" height="32" alt="">
+      <img class="icon" src="assets/icon-unscramble.png" width="48" height="48" alt="Word Unscramble icon">
       <h3>Word Unscramble</h3>
       <p>Words from your list, shuffled live.</p>
     </article>
     <article class="card">
-      <img class="icon" src="assets/icon-typing.png" width="32" height="32" alt="">
+      <img class="icon" src="assets/icon-typing.png" width="48" height="48" alt="Typing Speed icon">
       <h3>Typing Speed</h3>
       <p>Exact-phrase races with optional verbatim mode.</p>
     </article>
     <article class="card">
-      <img class="icon" src="assets/icon-trivia.png" width="32" height="32" alt="">
+      <img class="icon" src="assets/icon-trivia.png" width="48" height="48" alt="Trivia icon">
       <h3>Trivia</h3>
       <p>Question bank from your config.</p>
     </article>
     <article class="card">
-      <img class="icon" src="assets/icon-guess.png" width="32" height="32" alt="">
+      <img class="icon" src="assets/icon-guess.png" width="48" height="48" alt="Guess-the-Number icon">
       <h3>Guess-the-Number</h3>
       <p>Hidden number in your range.</p>
     </article>
     <article class="card">
-      <img class="icon" src="assets/icon-broadcast.png" width="32" height="32" alt="">
+      <img class="icon" src="assets/icon-broadcast.png" width="48" height="48" alt="Smart broadcasts icon">
       <h3>Smart broadcasts</h3>
       <p>Interval, player-count, and low-TPS alerts, each with its own cooldown.</p>
     </article>
-    <article class="card">
-      <img class="icon" src="assets/mascot-quizmaster.png" width="32" height="32" alt="">
-      <h3>Wandering Quizmaster <img src="assets/badge-new.png" width="48" height="16" alt="New"></h3>
-      <p>A named Villager appears near a random player asking multiplied-reward questions. Opt-in.</p>
+    <article class="card quizmaster-card">
+      <img class="quiz-mascot" src="assets/mascot-full-ask.png" width="96" height="144" alt="">
+      <div>
+        <h3>Wandering Quizmaster <img src="assets/badge-new.png" width="48" height="16" alt="New"></h3>
+        <p>A named Villager appears near a random player asking multiplied-reward questions. Opt-in.</p>
+      </div>
     </article>
   </div>
 </section>
 
 <section id="captures" class="wrap section">
   <h2>How a round looks</h2>
-  <p class="sub">Concept mockups in game-chat style. Real captures ship after release.</p>
-  <div class="feature-grid">
-    <div class="mc-chat" role="img" aria-label="Concept mockup of a math flash round in Minecraft chat">
-      <p><span class="mc-red">[MATH FLASH]</span> <span class="mc-white">Quick! What is </span><span class="mc-yellow">67 * 56</span><span class="mc-white">?</span></p>
-      <p><span class="mc-gray">&lt;TestPlayer1&gt; 3752</span></p>
-      <p><span class="rar-common">You won! +250.0</span></p>
-    </div>
-    <div class="mc-chat" role="img" aria-label="Concept mockup of a quizmaster round in Minecraft chat">
-      <p><span class="mc-gold">[QUIZMASTER near Ana]</span> <span class="mc-white">Unscramble: </span><span class="mc-yellow">LBEDNRE</span><span class="mc-white">!</span></p>
-      <p><span class="mc-gray">&lt;Bob&gt; blender</span></p>
-      <p><span class="rar-epic">Bob won! +1500.0</span></p>
-      <p><span class="mc-gold">New record! Bob answered in 4.2s</span></p>
-    </div>
+  <p class="sub">Real rounds, real payouts.</p>
+  <div class="capture-grid">
+    <div class="chat-frame"><img class="capture" src="assets/capture-math-win.png" width="659" height="63" alt="Math Flash round: 43 times 100 for a 350 reward, player answers 4300 and wins"></div>
+    <div class="chat-frame"><img class="capture" src="assets/capture-unscramble-win.png" width="670" height="55" alt="Word Unscramble round for a 400 reward, player answers and wins"></div>
+    <div class="chat-frame"><img class="capture" src="assets/capture-typing-win.png" width="673" height="75" alt="Typing Speed round for a 600 reward, player answers and wins"></div>
+    <div class="chat-frame"><img class="capture" src="assets/capture-trivia-win.png" width="657" height="60" alt="Trivia round asking which year Minecraft 1.0 released for a 400 reward, player answers 2011 and wins"></div>
   </div>
+  <div class="chat-frame capture-large"><img class="capture" src="assets/capture-quizmaster-villager.png" width="858" height="480" alt="Wandering Quizmaster villager with its orange nameplate, standing by the water in daylight"></div>
+  <div class="chat-frame"><img class="capture" src="assets/capture-quizmaster-win.png" width="657" height="57" alt="Quizmaster round for a 642 reward, player answers and wins"></div>
 </section>
+
+<section id="rewards" class="wrap section">
+  <h2>Rewards that fit your economy</h2>
+  <p class="sub">Money, commands, or both, picked per round by weight.</p>
+  <ul class="reward-list">
+    <li><img class="chip" src="assets/chip-rare.png" width="24" height="24" alt=""><span>Each game has a <strong>reward list</strong>, and one entry is picked per round by weight.</span></li>
+    <li><img class="chip" src="assets/chip-coin.png" width="24" height="24" alt=""><span><span class="rar-common">Money rewards</span> scale with question difficulty between a min and a max.</span></li>
+    <li><img class="chip" src="assets/chip-command.png" width="24" height="24" alt=""><span><span class="rar-rare">Command rewards</span> run a console command, with <code>%player%</code> as the winner's name.</span></li>
+    <li><img class="chip" src="assets/chip-epic.png" width="24" height="24" alt=""><span>The Quizmaster <span class="rar-epic">multiplies money rewards only</span>.</span></li>
+    <li>An old <code>reward-amount</code> config still works.</li>
+  </ul>
+</section>
+
+<div class="divider divider-stone" role="presentation"></div>
 
 <section id="pricing" class="wrap section">
   <h2>Get UniversalChatGames</h2>
   <p class="sub">One purchase, every future 1.x update included.</p>
-  <div class="checkout-card">
-    <span class="badge">Lifetime access</span>
-    <div class="price"><span class="currency">$</span>9.99</div>
-    <p class="launch-tier">Launch tier</p>
-    <ul class="checkout-list">
-      <li>All 5 game modes + smart broadcasts</li>
-      <li>Spigot · Paper · Folia, one jar</li>
-      <li>Vault + Bedrock-friendly, no database required</li>
-    </ul>
-    <a class="btn btn-primary btn-block" href="https://builtbybit.com/resources/universalchatgames.127513/">Checkout on BuiltByBit</a>
-    <p class="checkout-note">Secure checkout via BuiltByBit · Java 21+ (25 for 26.x)</p>
+  <div class="pricing-wrap">
+    <div class="checkout-card">
+      <span class="badge">Lifetime access</span>
+      <div class="price"><span class="currency">$</span>9.99</div>
+      <p class="launch-tier">Launch tier</p>
+      <ul class="checkout-list">
+        <li>All 5 game modes + smart broadcasts</li>
+        <li>Spigot · Paper · Folia, one jar</li>
+        <li>Vault + Bedrock-friendly, no database required</li>
+      </ul>
+      <a class="btn btn-primary btn-block" href="https://builtbybit.com/resources/universalchatgames.127513/">Checkout on BuiltByBit</a>
+      <p class="checkout-note">Secure checkout via BuiltByBit · Java 21+ (25 for 26.x)</p>
+    </div>
+    <img class="pricing-mascot" src="assets/mascot-full-point.png" width="128" height="192" alt="">
   </div>
 </section>
 
@@ -145,11 +189,18 @@
 </section>
 </main>
 
-<div class="divider" role="presentation"></div>
+<div class="divider divider-dirt" role="presentation"></div>
 
 <footer>
   <div class="wrap">
-    UniversalChatGames v1.3 by VeiledKernel · Support via BuiltByBit resource page
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#setup">Setup</a>
+      <a href="#faq">FAQ</a>
+      <a href="docs.html">Docs</a>
+    </nav>
+    UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
   </div>
 </footer>
 

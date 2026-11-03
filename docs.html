@@ -3,12 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Docs — UniversalChatGames v1.3</title>
+<title>Docs — UniversalChatGames v1.4</title>
 <meta name="description" content="Install, commands, permissions, and config reference for UniversalChatGames.">
+<link rel="canonical" href="https://universalchatgames.netlify.app/docs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="UniversalChatGames">
+<meta property="og:title" content="Docs — UniversalChatGames">
+<meta property="og:description" content="Install, commands, permissions, and config reference for UniversalChatGames.">
+<meta property="og:url" content="https://universalchatgames.netlify.app/docs.html">
+<meta property="og:image" content="https://universalchatgames.netlify.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="UniversalChatGames: Dead chat kills servers. A pixel-art night scene with the Quizmaster.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d0e12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="font.ttf" as="font" type="font/ttf" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -23,20 +38,20 @@
       <a href="index.html#faq">FAQ</a>
       <a href="docs.html" aria-current="page">Docs</a>
     </nav>
-    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy — $9.99</a>
+    <a class="btn btn-primary btn-sm" href="https://builtbybit.com/resources/universalchatgames.127513/">Buy<span class="btn-price"> — $9.99</span></a>
   </div>
 </header>
 
 <main class="wrap">
 <section class="section">
-  <p class="sub">UNIVERSALCHATGAMES · v1.2</p>
+  <p class="sub">UNIVERSALCHATGAMES · v1.4</p>
   <h1>Docs</h1>
   <p class="lede">Install, commands, permissions, and every config key. One page, no hunting.</p>
 
   <h2>Install</h2>
   <ol class="steps">
     <li>Drop <code>universal-chatgames.jar</code> into <code>plugins/</code>.</li>
-    <li>Start the server once to generate <code>config.yml</code>.</li>
+    <li>Start the server once to generate <code>config.yml</code>, <code>messages.yml</code> and the <code>games/</code> folder.</li>
     <li>Optional: install Vault plus an economy backend. Without Vault, set <code>engine-settings.reward-fallback-command</code>.</li>
     <li>Restart. Console must show <code>UniversalChatGames enabled (scheduler: Bukkit)</code> on Spigot/Paper or <code>(scheduler: Folia)</code> on Folia.</li>
   </ol>
@@ -51,7 +66,7 @@
   </div>
 
   <h2>Config reference</h2>
-  <p class="sub">Everything lives in <code>config.yml</code>. Edit, save, then run <code>/chatgames reload</code> — no restart needed.</p>
+    <p class="sub">Settings live in three places: <code>config.yml</code> (engine, Bedrock, storage, Quizmaster, broadcasts), <code>games/</code> (each game's mechanics and rewards) and <code>messages.yml</code> (all player-facing text). Edit, save, then run <code>/chatgames reload</code> — no restart needed.</p>
   <div class="feature-grid">
     <article class="card">
       <h3>Round timing</h3>
@@ -67,13 +82,19 @@
     </article>
     <article class="card">
       <h3>Game modes</h3>
-      <p>Each mode has <code>enabled</code>, <code>min-players</code>, <code>reward-amount</code>, <code>weight</code> (pick chance), and <code>announcement-format</code>, plus its own word, phrase, or question list.</p>
-      <p>Trivia lines look like this: <code>What year did Minecraft 1.0 release?|2011</code> — question, pipe, exact answer.</p>
+      <p>Each game lives in <code>games/&lt;name&gt;.yml</code> with <code>enabled</code>, <code>display-name</code>, <code>min-players</code>, <code>rewards</code>, <code>weight</code> (pick chance), plus its own word, phrase, or question list. Announcement templates moved to <code>messages.yml</code> under <code>announcements.&lt;game&gt;</code>.</p>
+      <p>A <code>rewards</code> list holds money entries (<code>min</code>, <code>max</code>, optional <code>weight</code> and <code>display</code>) and command entries (<code>command</code>, <code>display</code>, optional <code>weight</code>); one is rolled per round and <code>%reward%</code> in <code>announcement-format</code> shows it. The old <code>reward-amount</code> still works as one fixed amount.</p>
+      <p>Trivia lines look like this: <code>What year did Minecraft 1.0 release?|2011|easy</code> — question, pipe, exact answer, and an optional |easy, |medium or |hard tier.</p>
+    </article>
+    <article class="card">
+      <h3>Winner messages</h3>
+      <p><code>winner.mode</code> picks TITLE, CHAT, BOTH or NONE. New installs show a title.</p>
+      <p><code>winner.title</code> and <code>winner.subtitle</code> accept <code>%game%</code> and <code>%reward%</code>; <code>winner.title-times</code> is "fadeIn,stay,fadeOut" in ticks.</p>
     </article>
     <article class="card">
       <h3>Quizmaster event</h3>
       <p>Off by default. When on, a named Villager sometimes spawns near a random player asking a high-value question.</p>
-      <p><code>chance</code> (0.10) — odds per round. <code>reward-multiplier</code> (3.0) — payout times the normal reward. <code>despawn-seconds</code> (60) — how long it sticks around.</p>
+      <p><code>chance</code> (0.10) — odds per round. <code>reward-multiplier</code> (3.0) — multiplies money rewards only; command rewards are unchanged. <code>despawn-seconds</code> (60) — how long it sticks around.</p>
     </article>
     <article class="card">
       <h3>Win tracking</h3>
@@ -95,7 +116,14 @@
 
 <footer>
   <div class="wrap">
-    UniversalChatGames v1.3 by VeiledKernel · Support via BuiltByBit resource page
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#setup">Setup</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="docs.html">Docs</a>
+    </nav>
+    UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
   </div>
 </footer>
 
