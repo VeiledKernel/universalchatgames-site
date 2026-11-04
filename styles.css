@@ -26,7 +26,6 @@ pre { max-width: 100%; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 body {
   margin: 0;
@@ -289,4 +288,5 @@ h3 img { vertical-align: middle; }
   .hero { animation: none; }
   .hero-stage .sky, .hero-stage .torch, .hero-stage .mascot.f1, .hero-stage .mascot.f2 { animation: none; }
   .hero-stage .alt { display: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }

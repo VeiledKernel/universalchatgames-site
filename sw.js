@@ -27,6 +27,25 @@ self.addEventListener('activate', function (event) {
     }).then(function () { return self.clients.claim(); })
   );
 });
+async function putInCache(request, response) {
+  try {
+    const cache = await caches.open(CACHE);
+    await cache.put(request, response);
+  } catch (e) {
+    // A failed cache write is ignored on purpose; the network response still goes out.
+  }
+}
+async function networkFirst(event) {
+  try {
+    const response = await fetch(event.request);
+    if (response.ok) {
+      event.waitUntil(putInCache(event.request, response.clone()));
+    }
+    return response;
+  } catch (e) {
+    return caches.match(event.request);
+  }
+}
 self.addEventListener('fetch', function (event) {
   if (event.request.method !== 'GET') {
     return;
@@ -35,17 +54,7 @@ self.addEventListener('fetch', function (event) {
   var isPage = event.request.mode === 'navigate'
     || /\.(html|css|js)$/.test(url.pathname);
   if (isPage) {
-    event.respondWith(
-      fetch(event.request).then(function (response) {
-        if (response.ok) {
-          var copy = response.clone();
-          caches.open(CACHE).then(function (cache) { return cache.put(event.request, copy); }).catch(function () {});
-        }
-        return response;
-      }).catch(function () {
-        return caches.match(event.request);
-      })
-    );
+    event.respondWith(networkFirst(event));
     return;
   }
   event.respondWith(
