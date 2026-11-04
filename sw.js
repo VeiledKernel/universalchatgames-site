@@ -43,6 +43,7 @@ async function networkFirst(event) {
     }
     return response;
   } catch (e) {
+    // Offline or the network failed: serve the cached copy instead.
     return caches.match(event.request);
   }
 }
