@@ -42,7 +42,7 @@ async function networkFirst(event) {
       event.waitUntil(putInCache(event.request, response.clone()));
     }
     return response;
-  } catch (e) {
+  } catch {
     // Offline or the network failed: serve the cached copy instead.
     return caches.match(event.request);
   }
