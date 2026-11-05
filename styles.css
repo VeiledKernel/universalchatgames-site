@@ -241,7 +241,14 @@ details {
   border-image: url('assets/panel-stone.png') 8 fill;
   padding: 14px 18px; margin-bottom: 10px;
 }
-summary { font-weight: 700; cursor: pointer; }
+summary { font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; list-style: none; overflow-wrap: anywhere; }
+summary::-webkit-details-marker { display: none; }
+/* Pixel toggle: plus when closed, minus when open, 32px at 1x. */
+summary::after {
+  content: ""; flex: 0 0 32px; width: 32px; height: 32px;
+  background: url('assets/ui-plus.png') no-repeat; image-rendering: pixelated;
+}
+details[open] > summary::after { background-image: url('assets/ui-minus.png'); }
 details p { color: var(--mute); margin: 8px 0 0; font-size: 0.95rem; }
 
 footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--mute); font-size: 0.9rem; text-align: center; }
