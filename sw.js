@@ -1,6 +1,6 @@
 // Offline cache for the static storefront. Same-origin GET only; nothing
 // sensitive passes through here (no checkout, no accounts on this page).
-var CACHE = 'ucg-site-v3';
+var CACHE = 'ucg-site-v4';
 var ASSETS = [
   './',
   'index.html',
@@ -10,6 +10,8 @@ var ASSETS = [
   'changelog.html',
   'font.ttf',
   'manifest.webmanifest',
+  'favicon-32.png',
+  'favicon-16.png',
   'icon-192.png',
   'icon-512.png'
 ];
