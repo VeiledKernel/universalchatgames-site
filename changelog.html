@@ -47,12 +47,76 @@
 
 <main class="wrap">
 <section class="section">
-  <p class="sub">UNIVERSALCHATGAMES · v1.4</p>
-  <h1>Changelog</h1>
+  <p class="sub">UNIVERSALCHATGAMES · v1.5</p>
+  <div class="page-head"><img class="page-pic" src="assets/art-clock.png" width="96" height="96" alt="" aria-hidden="true"><h1>Changelog</h1></div>
   <p class="lede">What changed in each release.</p>
 
   <article class="card">
-    <h2>1.4.0 <span class="badge">Latest</span></h2>
+    <h2>1.5.0 <span class="badge">Latest</span></h2>
+    <h3>New games</h3>
+    <ul>
+      <li>Unreverse: a backwards word appears in chat; type it forwards to win.</li>
+      <li>Fill-in: a word with blanks appears; type the whole word.</li>
+      <li>Random characters: a random string appears; retype it exactly.</li>
+      <li>Word library: Unscramble, Typing, Fill-in and Unreverse can draw on every block, item and mob name; exclude-words removes entries.</li>
+      <li>Trivia ships with 53 fact-checked questions.</li>
+    </ul>
+    <h3>Difficulty and points</h3>
+    <ul>
+      <li>Five tiers, Very Easy to Very Hard; harder questions pay more points (difficulty-points in config.yml).</li>
+      <li>The tier shows through %difficulty% in announcements and reward texts.</li>
+      <li>Trivia tags |very-easy through |very-hard set the tier; |medium counts as Basic, and untagged lines count as Basic too.</li>
+    </ul>
+    <h3>Stats and leaderboards</h3>
+    <ul>
+      <li>Wins go to a win log that resets on storage.log-reset (MONTHLY, WEEKLY, DAYS:30 or NEVER); fresh installs track wins, upgrades keep their setting.</li>
+      <li>/chatgames stats shows period and lifetime totals (chatgames.stats; chatgames.stats.others for other players).</li>
+      <li>/chatgames top opens leaderboard menus (chatgames.top); the layout lives in leaderboard.yml and refreshes every leaderboard.refresh-seconds.</li>
+      <li>Heads show player skins, cached quietly in the background; game-list.textures.&lt;game&gt; (plus overall) sets custom head icons from skin texture values.</li>
+    </ul>
+    <h3>Round feedback and sounds</h3>
+    <ul>
+      <li>WIN, LOSE, TIMEOUT and SKIPPED each have their own mode (TITLE, CHAT, BOTH or NONE); muted players hear nothing, but the winner always gets the win.</li>
+      <li>Each game and event can set its own sounds; config.yml sounds fill the gaps, and "none" silences an event.</li>
+    </ul>
+    <h3>PlaceholderAPI</h3>
+    <ul>
+      <li>Optional soft dependency: %chatgames_points%, %chatgames_wins%, %chatgames_rank% and %chatgames_best%, each also per game (for example points_trivia), plus %chatgames_top_1_name% and %chatgames_top_1_points%, overall and per game (for example top_trivia_1_name); placeholders.none ("-") covers blanks.</li>
+    </ul>
+    <h3>Configuration</h3>
+    <ul>
+      <li>config.yml keeps engine, Bedrock, storage, Quizmaster and broadcasts; each game has its own games/&lt;name&gt;.yml; every player-facing string lives in messages.yml.</li>
+      <li>Winner feedback can be a title, chat, both or nothing (winner.mode in messages.yml); new installs show a title.</li>
+      <li>%game% shows each game's display-name, set in its game file.</li>
+      <li>The Quizmaster announcement prefix is editable (announcements.quizmaster-prefix, with %host%).</li>
+      <li>Safer reloads: a file with a YAML error keeps the previous settings, says so in chat, and logs the file name with the line and column of the error; config-version is reserved for a future layout change.</li>
+      <li>Upgrading: nothing changes until you choose to. Existing servers keep their config.yml chat-games sections and get one console note at startup. To switch, see "Switching to split files" in the manual.</li>
+    </ul>
+    <h3>Fixes</h3>
+    <ul>
+      <li>Reloading no longer stops Paper rounds, stacks game loops or leaves stale timeouts behind.</li>
+      <li>A winner who disconnects mid-payout is still paid and recorded.</li>
+      <li>An unknown trivia |tag warns in the console and plays on instead of jamming the round.</li>
+      <li>Times show as 1.53s, not 1.53ss.</li>
+      <li>The winning answer is remembered for 3 seconds after a round ends: late correct answers in that window get "Too slow!" (at most 2 per round) and stay hidden when hide-correct-answer is on.</li>
+      <li>Multi-word Unscramble entries scramble word by word and keep their spaces.</li>
+      <li>Prize amounts print as whole numbers ("223", not "223.0").</li>
+      <li>Non-ops get a clear reply instead of silence on start, skip, reload and audit.</li>
+      <li>"New record!" skips muted players but still reaches a muted winner.</li>
+      <li>TPS alerts jump the broadcast queue instead of being crowded out by the interval reminder.</li>
+      <li>A third "Too slow!" can no longer slip through when answers land at the same instant.</li>
+    </ul>
+    <h3>Upgrading</h3>
+    <ul>
+      <li>On an upgraded config, other players now see a lose line when someone wins, and everyone gets a "Time's up!" title on timeout; 1.4 sent neither. Set lose.mode and timeout.mode to NONE in messages.yml to keep the 1.4 behaviour.</li>
+      <li>"New record!" is a per-player record across all games, timed at payout.</li>
+      <li>Difficulty is relative to each game's own list, so adding a much longer word lowers the tier, and the prize, of the others.</li>
+      <li>Storage stays off on upgraded servers unless you turn it on; stats and leaderboards need it.</li>
+    </ul>
+  </article>
+
+  <article class="card">
+    <h2>1.4.0</h2>
     <ul>
       <li>Reward pools: each game can list several rewards. One is rolled per round by weight. Money rewards scale between min and max with question difficulty. Command rewards run once from console, with %player% or {player} replaced by the winner's name.</li>
       <li>Announcements show the exact prize through %reward%, and the winner message is configurable as engine-settings.win-message.</li>
@@ -60,8 +124,8 @@
       <li>Quizmaster's reward-multiplier now applies to money rewards only. Command rewards are unchanged.</li>
       <li>Invalid reward entries are skipped with a numbered warning in the log. A game with no valid rewards is left out of rotation, and /chatgames audit flags it.</li>
       <li>Upgrading: config.yml is never rewritten, so existing servers keep their file, and the old reward-amount still pays its exact value. To show the prize in announcements, add %reward% to your announcement-format lines, or compare against the new default config.</li>
-      <li>The Quizmaster villager is never saved to the world, so a restart during a round cannot leave it behind.</li>
-      <li>A negative or non-finite legacy reward-amount now disables that game's rewards, so it is never picked; /chatgames audit flags the game.</li>
+      <li>The Quizmaster entity is never saved to disk, so a restart during a Quizmaster round cannot leave it behind.</li>
+      <li>A negative or non-finite reward-amount turns off that game's prize pool, and the game leaves rotation.</li>
     </ul>
   </article>
 
@@ -122,6 +186,7 @@
 
 <footer>
   <div class="wrap">
+    <div class="footer-mascot" aria-hidden="true"><img class="wave f1" src="assets/mascot-full-wave-f1.png" width="64" height="96" alt="" aria-hidden="true"><img class="wave f2" src="assets/mascot-full-wave-f2.png" width="64" height="96" alt="" aria-hidden="true"></div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="index.html#features">Features</a>
       <a href="index.html#pricing">Pricing</a>
@@ -130,7 +195,7 @@
       <a href="docs.html">Docs</a>
       <a href="changelog.html" aria-current="page">Changelog</a>
     </nav>
-    UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
+    UniversalChatGames v1.5 by VeiledKernel · Support via BuiltByBit resource page
   </div>
 </footer>
 

@@ -77,6 +77,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .footer-nav { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
 .footer-nav a { color: var(--mute); text-decoration: none; }
+/* Content text links: amber and underlined; hover/focus brightens. Header nav,
+   footer nav, logo and .btn buttons keep their own styles (all outside main). */
+main a:not(.btn) { color: var(--amber); text-decoration: underline; }
+main a:not(.btn):visited { color: var(--amber); }
+main a:not(.btn):hover, main a:not(.btn):focus-visible { color: #ffd94a; }
 .btn-block { display: block; text-align: center; }
 .btn-primary { background: var(--amber); color: var(--on-amber); }
 .btn-primary:hover { filter: brightness(1.08); }
@@ -183,7 +188,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .card h3 { margin: 12px 0 8px; font-size: 1.05rem; }
 .card p { color: var(--mute); font-size: 0.92rem; margin: 0; }
-.icon { width: 48px; height: 48px; }
+.icon { width: 64px; height: 64px; }
 .quizmaster-card { grid-column: 1 / -1; outline: 2px solid var(--violet); display: flex; gap: 18px; align-items: center; }
 .quiz-mascot { width: 96px; height: 144px; image-rendering: pixelated; flex-shrink: 0; }
 /* Captures: real rounds in panel-chat frames. */
@@ -212,7 +217,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* Checkout: one centered tier, the page's conversion focal point. */
 .pricing-wrap { display: flex; gap: 32px; align-items: center; justify-content: center; }
 .pricing-mascot { width: 128px; height: 192px; image-rendering: pixelated; flex-shrink: 0; }
-@media (max-width: 759px) { .pricing-mascot { display: none; } }
 .checkout-card {
   max-width: 420px; text-align: center;
   background: var(--card);
@@ -227,13 +231,54 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .checkout-note { color: var(--mute); font-size: 0.8rem; margin-top: 14px; }
 
 /* Steps, code, FAQ. */
-.steps { padding-left: 22px; max-width: 640px; }
+.steps { display: grid; grid-template-columns: 1fr; gap: 16px; list-style: none; padding-left: 0; counter-reset: step; }
+@media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+.steps li {
+  position: relative;
+  counter-increment: step;
+  background: var(--card);
+  border: 8px solid transparent;
+  border-image: url('assets/panel-stone.png') 8 fill;
+  padding: 22px;
+  margin-bottom: 0;
+  text-align: left;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  top: 22px;
+  left: 98px;
+  color: var(--amber);
+  font-family: 'MinecraftFont', 'Press Start 2P', monospace;
+  font-size: 16px;
+}
+.step-pic { width: 64px; height: 64px; image-rendering: pixelated; display: block; margin-bottom: 12px; }
+/* Docs Install list: plain numbered reference, separate from the home page Setup cards. */
+.install-list { list-style: decimal; margin: 0 0 28px; padding-left: 24px; color: var(--ink); }
+.install-list li { margin-bottom: 8px; }
+.install-list li:last-child { margin-bottom: 0; }
+.install-list li::marker { color: var(--amber); }
+/* Link under the home page Setup cards to the full docs Install section. */
+.steps-more { margin: 16px 0 0; }
+/* Wall torches flanking the price card: same 1s steps(1) cycle as the hero torches. */
+.wall-torch { position: relative; width: 24px; height: 48px; flex-shrink: 0; align-self: flex-start; margin-top: 48px; }
+.wall-torch .wt { position: absolute; inset: 0; width: 24px; height: 48px; image-rendering: pixelated; opacity: 0; animation: skyCycle 1s steps(1) infinite; }
+.wall-torch .wt.f1 { opacity: 1; }
+.wall-torch .wt.f2 { animation-delay: -0.75s; }
+.wall-torch .wt.f3 { animation-delay: -0.5s; }
+.wall-torch .wt.f4 { animation-delay: -0.25s; }
+@media (max-width: 759px) { .wall-torch, .pricing-mascot { display: none; } }
 .reward-list { list-style: none; padding-left: 0; max-width: 640px; }
 .reward-list li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
 .reward-list .chip { width: 24px; height: 24px; image-rendering: pixelated; flex-shrink: 0; }
 .reward-list li:last-child { padding-left: 36px; }
-.steps li { margin-bottom: 14px; }
-.steps li::marker { color: var(--amber); font-weight: 700; }
+/* Rewards: list left, chest right on wide screens; chest centred below on phones. */
+.rewards-body { display: grid; grid-template-columns: 1fr; justify-items: start; gap: 24px; }
+.reward-chest { width: 192px; height: 128px; image-rendering: pixelated; flex-shrink: 0; justify-self: center; }
+@media (min-width: 900px) {
+  .rewards-body { grid-template-columns: 1fr auto; align-items: center; gap: 32px; justify-items: start; }
+  .reward-chest { justify-self: start; }
+}
 code { background: var(--codebg); padding: 2px 8px; border-radius: 6px; font-size: 0.9em; }
 details {
   background: var(--card);
@@ -251,7 +296,17 @@ summary::after {
 details[open] > summary::after { background-image: url('assets/ui-minus.png'); }
 details p { color: var(--mute); margin: 8px 0 0; font-size: 0.95rem; }
 
-footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--mute); font-size: 0.9rem; text-align: center; }
+footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--mute); font-size: 0.9rem; text-align: center; --layer-a: 0.75; background-image: linear-gradient(rgba(13,14,18,var(--layer-a)), rgba(13,14,18,var(--layer-a))), url('assets/tile-bedrock.png'); background-repeat: repeat; background-size: auto, 64px 64px; image-rendering: pixelated; }
+footer > .wrap { background: var(--bg); padding: 20px 24px; }
+.footer-mascot { position: relative; width: 64px; height: 96px; margin: 0 auto 16px; }
+.footer-mascot .wave { position: absolute; inset: 0; width: 64px; height: 96px; image-rendering: pixelated; }
+.footer-mascot .f1 { animation: idleA 1.35s steps(1) infinite; }
+.footer-mascot .f2 { opacity: 0; animation: idleB 1.35s steps(1) infinite; }
+.page-head { display: flex; align-items: center; gap: 20px; }
+.page-pic { width: 96px; height: 96px; image-rendering: pixelated; flex-shrink: 0; }
+@media (max-width: 599px) {
+  .page-head { flex-direction: column; align-items: flex-start; }
+}
 
 /* Pixel assets: native grid only, integer display, never smoothed. */
 .icon, .logo img, .divider { image-rendering: pixelated; }
@@ -260,6 +315,23 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--m
 .divider-grass { background-image: url('assets/divider-grass.png'); }
 .divider-stone { background-image: url('assets/divider-stone.png'); }
 .divider-dirt { background-image: url('assets/divider-dirt.png'); }
+.divider-deep { background-image: url('assets/divider-deep.png'); }
+.divider-bedrock { background-image: url('assets/divider-bedrock.png'); }
+/* Dig-down layers: 32x32 tiles shown at 2x over a darkening overlay. */
+.stratum { width: 100%; image-rendering: pixelated; background-repeat: repeat; background-size: auto, 64px 64px; }
+.stratum-dirt { --layer-a: 0.75; background-image: linear-gradient(rgba(13,14,18,var(--layer-a)), rgba(13,14,18,var(--layer-a))), url('assets/tile-dirt.png'); }
+.stratum-stone { --layer-a: 0.75; background-image: linear-gradient(rgba(13,14,18,var(--layer-a)), rgba(13,14,18,var(--layer-a))), url('assets/tile-stone.png'); position: relative; }
+.ore { position: absolute; width: 32px; height: 32px; image-rendering: pixelated; pointer-events: none; display: none; }
+.stratum-stone .ore:nth-of-type(1) { left: 24px; top: 8%; }
+.stratum-stone .ore:nth-of-type(2) { left: 40px; top: 41%; }
+.stratum-stone .ore:nth-of-type(3) { left: 24px; top: 77%; }
+.stratum-stone .ore:nth-of-type(4) { right: 40px; top: 22%; }
+.stratum-stone .ore:nth-of-type(5) { right: 24px; top: 58%; }
+.stratum-stone .ore:nth-of-type(6) { right: 40px; top: 90%; }
+@media (min-width: 1200px) {
+  .stratum-stone .ore { display: block; }
+}
+.stratum-deep { --layer-a: 0.75; background-image: linear-gradient(rgba(13,14,18,var(--layer-a)), rgba(13,14,18,var(--layer-a))), url('assets/tile-deep.png'); }
 /* 9-patch frames on large primary buttons; nav keeps the flat fill. */
 .btn-primary:not(.btn-sm) {
   border: 8px solid transparent;
@@ -284,16 +356,23 @@ h3 img { vertical-align: middle; }
 .launch-tier { color: #fa0; font-size: 0.8rem; font-weight: 700; }
 
 /* Icon lit variants: same silhouette, one step lighter, on card hover. */
-.card:hover .icon[src="assets/icon-math.png"] { content: url('assets/icon-math-lit.png'); }
-.card:hover .icon[src="assets/icon-unscramble.png"] { content: url('assets/icon-unscramble-lit.png'); }
-.card:hover .icon[src="assets/icon-typing.png"] { content: url('assets/icon-typing-lit.png'); }
-.card:hover .icon[src="assets/icon-trivia.png"] { content: url('assets/icon-trivia-lit.png'); }
-.card:hover .icon[src="assets/icon-guess.png"] { content: url('assets/icon-guess-lit.png'); }
-.card:hover .icon[src="assets/icon-broadcast.png"] { content: url('assets/icon-broadcast-lit.png'); }
+/* Lit hover icons: same silhouette, one step lighter, on card hover. */
+.card:hover .icon[src="assets/icon-math-64.png"] { content: url('assets/icon-math-64-lit.png'); }
+.card:hover .icon[src="assets/icon-unscramble-64.png"] { content: url('assets/icon-unscramble-64-lit.png'); }
+.card:hover .icon[src="assets/icon-typing-64.png"] { content: url('assets/icon-typing-64-lit.png'); }
+.card:hover .icon[src="assets/icon-trivia-64.png"] { content: url('assets/icon-trivia-64-lit.png'); }
+.card:hover .icon[src="assets/icon-guess-64.png"] { content: url('assets/icon-guess-64-lit.png'); }
+.card:hover .icon[src="assets/icon-broadcast-64.png"] { content: url('assets/icon-broadcast-64-lit.png'); }
+.card:hover .icon[src="assets/icon-unreverse-64.png"] { content: url('assets/icon-unreverse-64-lit.png'); }
+.card:hover .icon[src="assets/icon-fillin-64.png"] { content: url('assets/icon-fillin-64-lit.png'); }
+.card:hover .icon[src="assets/icon-randomchars-64.png"] { content: url('assets/icon-randomchars-64-lit.png'); }
 
 @media (prefers-reduced-motion: reduce) {
   .hero { animation: none; }
   .hero-stage .sky, .hero-stage .torch, .hero-stage .mascot.f1, .hero-stage .mascot.f2 { animation: none; }
   .hero-stage .alt { display: none; }
+  .wall-torch .wt { animation: none; }
+  .footer-mascot .wave { animation: none; }
+  .footer-mascot .f2 { display: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }

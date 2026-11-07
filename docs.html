@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Docs — UniversalChatGames v1.4</title>
+<title>Docs — UniversalChatGames v1.5</title>
 <meta name="description" content="Install, commands, permissions, and config reference for UniversalChatGames.">
 <link rel="canonical" href="https://universalchatgames.netlify.app/docs.html">
 <meta property="og:type" content="website">
@@ -47,29 +47,31 @@
 
 <main class="wrap">
 <section class="section">
-  <p class="sub">UNIVERSALCHATGAMES · v1.4</p>
-  <h1>Docs</h1>
+  <p class="sub">UNIVERSALCHATGAMES · v1.5</p>
+  <div class="page-head"><img class="page-pic" src="assets/art-book.png" width="96" height="96" alt="" aria-hidden="true"><h1>Docs</h1></div>
   <p class="lede">Install, commands, permissions, and every config key. One page, no hunting.</p>
 
   <h2 id="install">Install</h2>
-  <ol class="steps">
+  <ol class="install-list">
     <li>Drop <code>universal-chatgames.jar</code> into <code>plugins/</code>.</li>
-    <li>Start the server once to generate <code>config.yml</code>.</li>
-    <li>Optional: install Vault plus an economy backend. Without Vault, set <code>engine-settings.reward-fallback-command</code>.</li>
-    <li>Restart. Console must show <code>UniversalChatGames enabled (scheduler: Bukkit)</code> on Spigot/Paper or <code>(scheduler: Folia)</code> on Folia.</li>
+    <li>Start the server once to generate <code>config.yml</code>, <code>messages.yml</code>, <code>leaderboard.yml</code> and the <code>games/</code> folder.</li>
+    <li>Optional: install Vault plus an economy backend. Without Vault, set <code>engine-settings.reward-fallback-command</code>. Optional: install PlaceholderAPI for the <code>%chatgames_*%</code> placeholders.</li>
+    <li>Restart. Console must show <code>UniversalChatGames enabled (scheduler: Bukkit)</code> on Paper or <code>(scheduler: Folia)</code> on Folia.</li>
   </ol>
 
   <h2>Commands</h2>
   <div class="feature-grid">
     <article class="card"><h3><code>/chatgames reload</code></h3><p>Atomic config reload, safe mid-round. Permission: <code>chatgames.reload</code> (default op).</p></article>
-    <article class="card"><h3><code>/chatgames start [mode]</code></h3><p>Force a round now; rejects when one is active. Modes: MATH, UNSCRAMBLE, TYPING, TRIVIA, GUESS. Permission: <code>chatgames.admin</code> (default op).</p></article>
+    <article class="card"><h3><code>/chatgames start [mode]</code></h3><p>Force a round now; rejects when one is active. Modes: MATH, UNSCRAMBLE, TYPING, TRIVIA, GUESS, UNREVERSE, FILL_IN, RANDOM_CHARS. Permission: <code>chatgames.admin</code> (default op).</p></article>
     <article class="card"><h3><code>/chatgames skip</code></h3><p>Clear the active round. Permission: <code>chatgames.admin</code> (default op).</p></article>
+    <article class="card"><h3><code>/chatgames stats [player]</code></h3><p>Period and lifetime totals. Permission: <code>chatgames.stats</code> (everyone), <code>chatgames.stats.others</code> (op) for other players. Needs storage.</p></article>
+    <article class="card"><h3><code>/chatgames top [game|overall]</code></h3><p>Leaderboard menus, players only. Permission: <code>chatgames.top</code> (everyone). Needs storage.</p></article>
     <article class="card"><h3><code>/chatgames toggle</code></h3><p>Mute or unmute game messages for yourself. Players only, no permission needed.</p></article>
     <article class="card"><h3><code>/chatgames audit</code></h3><p>Prints scheduler branch, versions, per-mode readiness, and storage state. Permission: <code>chatgames.admin</code> (default op).</p></article>
   </div>
 
   <h2>Config reference</h2>
-  <p class="sub">Everything lives in <code>config.yml</code>. Edit, save, then run <code>/chatgames reload</code> — no restart needed.</p>
+  <p class="sub">Settings live in four places under <code>plugins/UniversalChatGames/</code>: <code>config.yml</code> (engine, Bedrock, storage, Quizmaster, broadcasts, leaderboard refresh), one file per game in <code>games/</code> (mechanics and rewards), <code>leaderboard.yml</code> (menu layout, custom icons) and <code>messages.yml</code> (all player-facing text). Edit, save, then run <code>/chatgames reload</code> — no restart needed, and a file with a YAML error keeps the previous settings.</p>
   <div class="feature-grid">
     <article class="card">
       <h3>Round timing</h3>
@@ -85,9 +87,10 @@
     </article>
     <article class="card">
       <h3>Game modes</h3>
-      <p>Each mode has <code>enabled</code>, <code>min-players</code>, <code>rewards</code>, <code>weight</code> (pick chance), and <code>announcement-format</code>, plus its own word, phrase, or question list.</p>
-      <p>A <code>rewards</code> list holds money entries (<code>min</code>, <code>max</code>, optional <code>weight</code> and <code>display</code>) and command entries (<code>command</code>, <code>display</code>, optional <code>weight</code>); one is rolled per round and <code>%reward%</code> in <code>announcement-format</code> shows it. The old <code>reward-amount</code> still works as one fixed amount.</p>
-      <p>Trivia lines look like this: <code>What year did Minecraft 1.0 release?|2011|easy</code> — question, pipe, exact answer, and an optional |easy, |medium or |hard tier.</p>
+      <p>The 8 game files — <code>math-flash</code>, <code>word-unscramble</code>, <code>typing-speed</code>, <code>trivia</code>, <code>guess-number</code>, <code>unreverse</code>, <code>fill-in</code>, <code>random-chars</code> — each with enable, display-name, min-players, rewards pool and weight, plus its own settings: value ranges; <code>words</code>, <code>phrases</code> or <code>questions</code> lists; <code>exact-match-case</code> (Typing Speed) or <code>exact-case</code> (Random Characters); <code>min-length</code>, <code>max-length</code> and <code>characters</code> (Random Characters).</p>
+      <p>Unscramble, Typing Speed, Fill-in and Unreverse can pull words from the built-in library (<code>library: true</code>) minus <code>exclude-words</code>.</p>
+      <p><code>trivia.yml</code> questions are <code>question|answer</code> lines with an optional <code>|tier</code> tag (<code>very-easy</code>, <code>easy</code>, <code>basic</code>, <code>medium</code>, <code>hard</code>, <code>very-hard</code>); harder tiers pay more points.</p>
+      <p>Each rewards entry is type money (<code>min</code>, <code>max</code>) or type command (<code>command</code>, <code>display</code>), with optional weight; see the comments in the game files.</p>
     </article>
     <article class="card">
       <h3>Quizmaster event</h3>
@@ -96,12 +99,25 @@
     </article>
     <article class="card">
       <h3>Win tracking</h3>
-      <p><code>storage.enabled</code> (off) — saves lifetime wins and fastest times to <code>wins.db</code> for leaderboards. Leave off if you don't need records.</p>
+      <p><code>storage.enabled</code> turns on the SQLite win log (on for fresh installs). <code>storage.log-reset</code> controls how often the per-period log resets: <code>MONTHLY</code>, <code>WEEKLY</code>, <code>DAYS:30</code> or <code>NEVER</code>. Turn it off if you don't need records; stats and leaderboards need it on.</p>
+    </article>
+    <article class="card">
+      <h3>Stats and leaderboards</h3>
+      <p><code>/chatgames stats</code> reads the win log: this period's wins and points per game, plus all-time totals and best times. <code>/chatgames top</code> opens the game list; picking a game (or Overall) opens ranking pages with previous/next navigation and a back button.</p>
+      <p><code>leaderboard.yml</code> controls the menu layout (rows, slots, icons, filler). <code>leaderboard.refresh-seconds</code> in <code>config.yml</code> sets how often rankings rebuild (10 to 3600, default 60). Ranking heads show player skins, resolved on a background thread and cached; set custom head icons with <code>game-list.textures.&lt;game&gt;</code> (plus <code>overall</code>).</p>
+    </article>
+    <article class="card">
+      <h3>Sounds</h3>
+      <p>Round events (start, win, lose, timeout, skipped) each play their own sound per game, set in the game file. Anything a game file leaves out falls back to <code>sounds</code> in <code>config.yml</code>; <code>none</code> turns an event off.</p>
+    </article>
+    <article class="card">
+      <h3>Placeholders</h3>
+      <p>With PlaceholderAPI installed: <code>%chatgames_points%</code>, <code>%chatgames_wins%</code>, <code>%chatgames_rank%</code> and <code>%chatgames_best%</code> show the viewer's overall numbers (best is the fastest time), each also per game (for example <code>points_trivia</code>). <code>%chatgames_top_1_name%</code> and <code>%chatgames_top_1_points%</code> show the top row, overall and per game. Past the end of a board, names show <code>placeholders.none</code> (<code>-</code> by default) and points show <code>0</code>.</p>
     </article>
     <article class="card">
       <h3>Smart broadcasts</h3>
       <p>Each entry needs an <code>id</code>, a <code>message</code>, and a <code>trigger-type</code>: <code>INTERVAL</code> fires on a timer, <code>TPS</code> fires only when the server lags below <code>tps-below-threshold</code>.</p>
-      <p><code>min-players</code> gates quiet servers, <code>cooldown-minutes</code> stops repeats.</p>
+      <p><code>min-players</code> gates quiet servers, <code>cooldown-minutes</code> stops repeats. TPS alerts jump ahead of interval reminders.</p>
     </article>
   </div>
 
@@ -114,6 +130,7 @@
 
 <footer>
   <div class="wrap">
+    <div class="footer-mascot" aria-hidden="true"><img class="wave f1" src="assets/mascot-full-wave-f1.png" width="64" height="96" alt="" aria-hidden="true"><img class="wave f2" src="assets/mascot-full-wave-f2.png" width="64" height="96" alt="" aria-hidden="true"></div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="index.html#features">Features</a>
       <a href="index.html#pricing">Pricing</a>
@@ -122,7 +139,7 @@
       <a href="docs.html">Docs</a>
       <a href="changelog.html">Changelog</a>
     </nav>
-    UniversalChatGames v1.4 by VeiledKernel · Support via BuiltByBit resource page
+    UniversalChatGames v1.5 by VeiledKernel · Support via BuiltByBit resource page
   </div>
 </footer>
 
