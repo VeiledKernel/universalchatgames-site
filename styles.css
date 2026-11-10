@@ -260,6 +260,15 @@ main a:not(.btn):hover, main a:not(.btn):focus-visible { color: #ffd94a; }
 .install-list li::marker { color: var(--amber); }
 /* Link under the home page Setup cards to the full docs Install section. */
 .steps-more { margin: 16px 0 0; }
+/* Section heading picture (FAQ): 64px, stays beside the heading on phones. */
+.section-pic { width: 64px; height: 64px; image-rendering: pixelated; flex-shrink: 0; }
+.page-head.faq-head { gap: 16px; }
+.page-head.faq-head h2 { margin: 0; }
+@media (max-width: 599px) { .page-head.faq-head { flex-direction: row; align-items: center; } }
+/* Docs upgrade note: icon top-aligned at 1x, text in body colour. */
+.note { display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--card); border: 1px solid var(--line); margin: 16px 0 28px; color: var(--ink); }
+.note-icon { width: 32px; height: 32px; image-rendering: pixelated; flex-shrink: 0; }
+.note p { margin: 0; }
 /* Wall torches flanking the price card: same 1s steps(1) cycle as the hero torches. */
 .wall-torch { position: relative; width: 24px; height: 48px; flex-shrink: 0; align-self: flex-start; margin-top: 48px; }
 .wall-torch .wt { position: absolute; inset: 0; width: 24px; height: 48px; image-rendering: pixelated; opacity: 0; animation: skyCycle 1s steps(1) infinite; }

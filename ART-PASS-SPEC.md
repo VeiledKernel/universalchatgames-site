@@ -25,6 +25,7 @@ Docs and changelog keep a plain background but get one header picture each.
 ## Rules on top of REDESIGN-SPEC Part B
 
 1. **Palette only.** Every asset uses the 16 palette colours plus the listed exceptions (#d9b48f #a67c52 skin, #7a3cc0 robe). Alpha is 0 or 255.
+   The seven note-icon colours (#425b29 #458a02 #5ab105 #68d400 #77f200 #f7ba00 #fbf900) are allowed in note-icon.png only: a bright "notice" green the palette does not have.
 2. **Whole-number scale.** Layer tiles are 32×32 and dividers 16×16, both shown at 2× (64px and 32px). A 16×16 layer tile repeats so often that its marks read as wallpaper (tried 2026-11-06). Pictures say their display scale below.
 3. **Text stays readable.** Tiles are drawn in their true palette colours, and the darkening is done in CSS: each layer is `background: linear-gradient(rgba(13,14,18,A), rgba(13,14,18,A)), url(tile) repeat`, with A between 0.65 and 0.85, starting at 0.75. At 0.85 the texture almost disappears; contrast maths shows 4.5:1 still holds at 0.60 on dirt and 0.50 on the other layers. A is chosen so that body text (`--ink`) and muted text (`--mute`) on the darkest and the lightest tile pixel, after the overlay, both have a contrast ratio of at least 4.5:1. The check script in W1 proves it.
 4. **Cards and panels stay solid.** Text sits on `--card` or a 9-slice panel, never directly on a tile, except section headings and the one-line `.sub` under them.
