@@ -1,6 +1,6 @@
 // Offline cache for the static storefront. Same-origin GET only; nothing
 // sensitive passes through here (no checkout, no accounts on this page).
-var CACHE = 'ucg-site-v8';
+var CACHE = 'ucg-site-v9';
 var ASSETS = [
   './',
   'index.html',
